@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="ethereum-chain-id" content="0x171">
+    <meta name="compatible-chains" content="evm-only">
+    <meta name="pulsechain:chainId" content="0x171">
+    
+    <title>Single Steak: PulseChain Single Staking Platform</title>
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://pulsechain-rpc.publicnode.com">
+    
+    <!-- Meta tags for social sharing -->
+    <meta property="og:title" content="Single Steak: PulseChain Staking Platform">
+    <meta property="og:description" content="Create and manage single-sided staking pools for PulseChain projects">
+    <meta property="og:image" content="https://singlesteak.com/images/meta.webp">
+    <meta property="og:url" content="https://singlesteak.com">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter/X card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Single Steak: PulseChain Staking Platform">
+    <meta name="twitter:description" content="Create and manage single-sided staking pools for PulseChain projects">
+    <meta name="twitter:image" content="https://singlesteak.com/images/meta.webp">
+    <meta name="twitter:site" content="https://singlesteak.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/steak.ico">
+    
+    <!-- Critical CSS inline -->
+    <style>
+        /* Critical above-the-fold styles */
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        .header { background: #1a1a1a; color: white; padding: 1rem 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+        .hero { background: #0a0a0a; color: white; padding: 4rem 0; }
+        .loading-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 9999; }
+    </style>
+    
+    <!-- Main CSS - load async -->
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    
+    <!-- Font Awesome with font-display swap -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <img src="images/steak.webp" alt="PulseChain Staking" id="site-logo" width="40" height="40" loading="eager">
+                </a>
+                Beta Version
+                <nav class="main-nav">
+                    <ul class="nav-links">
+                        <li><a href="#explore" class="nav-link">Explore Pools</a></li>
+                        <li><a href="#create" class="nav-link create-btn">Create Pool</a></li>
+                        <li><a href="#dashboard" class="nav-link">My Dashboard</a></li>
+                        <li><a href="#footer" class="nav-link">Guide & Whitepaper</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="wallet-connect">
+                    <button id="connect-wallet" class="btn connect-btn">
+                        <i class="fas fa-wallet"></i> Connect Wallet
+                    </button>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://t.me/singlesteak" target="_blank" class="social-link" rel="noopener">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://x.com/singlesteak" target="_blank" class="social-link" rel="noopener">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                </div>
+                
+                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Single Steak: PulseChain DIY Staking Platform</h1>
+                <p class="hero-subtitle">Create and manage single-sided staking pools for your PulseChain project</p>
+                <div class="hero-cta">
+                    <a href="#create" class="btn primary-btn">Create Pool</a>
+                    <a href="#explore" class="btn secondary-btn">Explore Pools</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/steak2.webp" alt="Staking Platform Illustration" width="400" height="400" loading="eager">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats" style="background-image: url('images/pool.webp'); background-size: 350px; background-repeat: repeat;">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 class="stat-value" id="total-pools">0</h3>
+                    <p class="stat-label">Active Pools</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="stat-value" id="avg-apy">0%</h3>
+                    <p class="stat-label">Average APY</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="steak-pool-card" id="steak-pool">
+        <div class="container">
+            <div class="pool-header">
+                <img src="images/steak2.webp" alt="STEAK Pool Logo" class="pool-logo">
+                <div class="pool-info">
+                    <h2 class="pool-name">STEAK Pool</h2>
+                    <p class="pool-symbol">STEAK</p>
+                    <p class="tax-info">1% deposit tax (reinvested back to pool), 1% withdrawal tax (supports project)</p>
+                </div>
+            </div>
+            <div class="pool-content">
+                <div class="pool-stats">
+                    <span class="stat-item">
+                        <span class="stat-label">APY:</span>
+                        <span class="stat-value apy-value">0%</span>
+                        <span class="apy-warning" style="display: none;">Low TVL - APY may vary</span>
+                    </span>
+                    <span class="stat-divider">|</span>
+                    <span class="stat-item">
+                        <span class="stat-label">Stakers:</span>
+                        <span class="stat-value staker-count">0</span>
+                    </span>
+                    <span class="stat-divider">|</span>
+                    <span class="stat-item">
+                        <span class="stat-label">TVL:</span>
+                        <span class="stat-value tvl-value">0 STEAK</span>
+                    </span>
+                </div>
+                <div class="pool-user-info">
+                    <span class="user-item">
+                        <span class="user-label">Your stake:</span>
+                        <span class="user-staked-value">0</span>
+                    </span>
+                    <span class="user-divider">|</span>
+                    <span class="user-item">
+                        <span class="user-label">Rewards:</span>
+                        <span class="user-rewards-value">0</span>
+                    </span>
+                </div>
+                <div class="pool-actions">
+                    <div class="action-group">
+                        <label for="deposit-amount">Deposit</label>
+                        <input type="number" id="deposit-amount" class="action-input" placeholder="0" min="0" step="0.0001">
+                        <button class="action-btn deposit-btn">Deposit</button>
+                    </div>
+                    <div class="action-group">
+                        <label for="withdraw-amount">Withdraw</label>
+                        <input type="number" id="withdraw-amount" class="action-input" placeholder="0" min="0"
+                            step="0.0001">
+                        <button class="action-btn withdraw-btn">Withdraw</button>
+                    </div>
+                    <div class="action-group">
+                        <button class="action-btn claim-btn">Claim</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Explore Pools Section -->
+    <section id="explore" class="explore-pools">
+        <div class="container">
+            <h2 class="section-title">Explore Staking Pools</h2>
+    
+            <div class="filter-options">
+                <div class="search-box">
+                    <input type="text" id="pool-search" placeholder="Search pools...">
+                    <i class="fas fa-search"></i>
+                </div>
+    
+                <div class="sort-options">
+                    <select id="sort-by">
+                        <option value="apy-high">Highest APY</option>
+                        <option value="apy-low">Lowest APY</option>
+                        <option value="tvl-high">Highest TVL</option>
+                        <option value="tvl-low">Lowest TVL</option>
+                        <option value="newest">Newest</option>
+                    </select>
+                </div>
+            </div>
+    
+            <div class="pools-grid" id="pools-container">
+                <!-- Pool cards will be dynamically inserted here -->
+    
+                <!-- Template for pool card -->
+                <template id="pool-card-template">
+                    <div class="pool-card">
+                        <div class="pool-header">
+                            <img src="" class="pool-logo" alt="Token Logo" width="48" height="48" loading="lazy">
+                            <div class="pool-info">
+                                <h3 class="pool-name"></h3>
+                                <p class="pool-symbol"></p>
+                            </div>
+                        </div>
+    
+                        <div class="pool-stats">
+                            <div class="pool-stat">
+                                <p class="stat-label">APY</p>
+                                <p class="stat-value apy-value"></p>
+                                <p class="apy-warning" style="display:none; font-size: 0.7rem; color: #ff9800;">Low TVL - APY may vary</p>
+                            </div>
+                            <div class="pool-stat">
+                                <p class="stat-label">Stakers</p>
+                                <p class="stat-value staker-count">0</p>
+                            </div>
+                            <div class="pool-stat">
+                                <p class="stat-label">TVL</p>
+                                <p class="stat-value tvl-value"></p>
+                            </div>
+                        </div>
+    
+                        <div class="pool-user-info">
+                            <p class="user-staked">Your stake: <span class="user-staked-value">0</span></p>
+                            <p class="user-rewards">Rewards: <span class="user-rewards-value">0</span></p>
+                        </div>
+    
+                        <div class="pool-actions">
+                            <button class="btn view-btn">View Details</button>
+                        </div>
+                    </div>
+                </template>
+    
+                <!-- Empty state -->
+                <div id="no-pools" class="no-pools">
+                    <img src="images/steak2.webp" alt="No pools found" width="200" height="200" loading="lazy">
+                    <h3>No staking pools found</h3>
+                    <p>Be the first to create a staking pool!</p>
+                    <a href="#create" class="btn primary-btn">Create Pool</a>
+                </div>
+            </div>
+            <div id="pagination-container" class="pagination-container">
+                <!-- Pagination buttons will be added here dynamically -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Create Pool Section -->
+    <section id="create" class="create-pool" style="background-image: url('images/tool.webp'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+        <div class="container">
+            <h2 class="section-title">Create a Staking Pool</h2>
+            <p class="section-subtitle">Allow users to stake your token and earn rewards</p>
+            
+            <div class="create-form-container">
+                <form id="create-pool-form" class="create-pool-form">
+                    <div class="form-group">
+                        <label for="token-address">Token Contract Address</label>
+                        <input type="text" id="token-address" placeholder="0x..." required>
+                        <div class="helper-text">Enter the contract address of your ERC20 token</div>
+                    </div>
+                    
+                    <div class="token-info" id="token-info">
+                        <div class="form-group">
+                            <label for="token-name">Token Name</label>
+                            <input type="text" id="token-name" placeholder="Token Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="token-symbol">Token Symbol</label>
+                            <input type="text" id="token-symbol" placeholder="Symbol" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expected-tvl">Expected TVL (for APY calculation)</label>
+                        <input type="number" id="expected-tvl" min="1" placeholder="e.g. 100000" required>
+                        <div class="helper-text">
+                            <strong>Important:</strong> This is only used to estimate rewards duration and total emission rate at that TVL level. Actual APY is fixed and doesn't vary with TVL.
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="target-apy">Target APY (%)</label>
+                        <input type="number" id="target-apy" min="1" max="10000" placeholder="e.g. 20" required>
+                        <div class="helper-text">
+                            <strong>This sets a fixed APY that remains constant regardless of how many tokens are staked.</strong> Total rewards emitted scale with TVL.
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reward-rate">Calculated Reward Rate (tokens per second)</label>
+                        <input type="number" id="reward-rate" step="0.000000000000000001" min="0" readonly>
+                        <div class="helper-text">
+                            This is the reward rate per staked token per second. Total pool rewards per second = this multiplier × total staked tokens. <strong>New rate takes 24hrs once set for staker security.</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="initial-rewards">Initial Rewards Amount</label>
+                        <input type="number" id="initial-rewards" min="0" required>
+                        <div class="helper-text">
+                            Start with enough tokens to last until you expect more stakers to join. If you run out of rewards, 
+                            staking continues but no new rewards are distributed. You can add more rewards anytime as the pool owner.
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pool-image">Pool Image</label>
+                        <input type="file" id="pool-image" accept="image/*" required>
+                        <div class="helper-text">Upload an image for your pool (max 5MB)</div>
+                        <div id="image-preview"></div>
+                    </div>
+                    
+                    <div class="form-preview">
+                        <h4>Preview</h4>
+                        <div class="apy-preview">
+                            <span>Initial APY (at expected TVL):</span>
+                            <span id="estimated-apy">0%</span>
+                        </div>
+                        <div class="rewards-duration">
+                            <span>Rewards will last:</span>
+                            <span id="rewards-duration">0 days</span>
+                        </div>
+                        <div class="fee-display">
+                            <span>Pool Creation Fee:</span>
+                            <span id="pool-creation-fee">Loading...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn primary-btn" id="create-pool-btn">Create Pool</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pool Details Modal -->
+    <div class="modal" id="pool-details-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Pool Details</h3>
+                <button class="close-modal" aria-label="Close modal">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="pool-details-header">
+                    <img src="" class="pool-logo-lg" id="detail-pool-logo" alt="Token Logo" width="64" height="64" loading="lazy">
+                    <div class="pool-details-info">
+                        <h2 id="detail-pool-name"></h2>
+                        <p id="detail-pool-symbol"></p>
+                        <p id="detail-pool-address"></p>
+                    </div>
+                </div>
+                
+                <div class="pool-details-stats">
+                    <div class="detail-stat">
+                        <h4>Current APY</h4>
+                        <p id="detail-apy"></p>
+                        <p id="detail-apy-warning" style="font-size: 0.8rem; color: #ff9800; display: none;">Low TVL - APY may decrease as more users stake</p>
+                    </div>
+                    <div class="detail-stat">
+                        <h4>Total Staked</h4>
+                        <p id="detail-total-staked"></p>
+                    </div>
+                    <div class="detail-stat">
+                        <h4>Reward Rate</h4>
+                        <p id="detail-reward-rate"></p>
+                    </div>
+                </div>
+                
+                <div class="user-stats">
+                    <h4>Your Position</h4>
+                    <div class="user-stats-grid">
+                        <div class="user-stat">
+                            <p class="stat-label">Your Stake</p>
+                            <p class="stat-value" id="detail-user-staked"></p>
+                        </div>
+                        <div class="user-stat">
+                            <p class="stat-label">Pending Rewards</p>
+                            <p class="stat-value" id="detail-user-rewards"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="staking-actions">
+                    <div class="stake-form">
+                        <h4>Stake Tokens</h4>
+                        <div class="input-with-max">
+                            <input type="number" id="stake-amount" placeholder="0.0" min="0" step="0.000000000000000001">
+                            <button class="max-btn" id="stake-max-btn">MAX</button>
+                        </div>
+                        <div class="balance-display">
+                            <p>Balance: <span id="user-token-balance">0</span></p>
+                        </div>
+                        <button class="btn primary-btn" id="stake-btn">Stake</button>
+                    </div>
+                    
+                    <div class="unstake-form">
+                        <h4>Unstake Tokens</h4>
+                        <div class="input-with-max">
+                            <input type="number" id="unstake-amount" placeholder="0.0" min="0" step="0.000000000000000001">
+                            <button class="max-btn" id="unstake-max-btn">MAX</button>
+                        </div>
+                        <div class="balance-display">
+                            <p>Staked: <span id="user-staked-balance">0</span></p>
+                        </div>
+                        <button class="btn secondary-btn" id="unstake-btn">Unstake</button>
+                    </div>
+                </div>
+                
+                <div class="reward-actions">
+                    <h4>Rewards</h4>
+                    <p>Pending Rewards: <span id="pending-rewards">0</span></p>
+                    <button class="btn claim-btn" id="claim-rewards-btn">Claim Rewards</button>
+                </div>
+                
+                <!-- Pool Owner Section (only visible to pool owner) -->
+                <div class="pool-owner-section" id="pool-owner-section">
+                    <h4>Pool Management</h4>
+                    <div class="owner-actions">
+                        <div class="add-rewards-form">
+                            <h5>Add Rewards</h5>
+                            <div class="input-with-max">
+                                <input type="number" id="add-rewards-amount" placeholder="0.0" min="0" step="0.000000000000000001">
+                                <button class="max-btn" id="rewards-max-btn">MAX</button>
+                            </div>
+                            <button class="btn primary-btn" id="add-rewards-btn">Add Rewards</button>
+                        </div>
+                        
+                        <div class="update-rate-form">
+                            <h5>Update Reward Rate</h5>
+                            <div class="input-with-max">
+                                <input type="number" id="new-reward-rate" placeholder="0.0" min="0" step="0.000000000000000001">
+                            </div>
+                            <div class="helper-text">Changes will apply after 24 hour timelock</div>
+                            <button class="btn primary-btn" id="update-rate-btn">Schedule Update</button>
+                        </div>
+                        
+                        <div class="pending-updates" id="pending-updates">
+                            <h5>Pending Updates</h5>
+                            <div class="pending-update-info">
+                                <p>New Rate: <span id="pending-rate">0</span></p>
+                                <p>Effective: <span id="pending-rate-time">--</span></p>
+                                <button class="btn primary-btn" id="apply-rate-btn">Apply Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Developer Dashboard Section -->
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <h2 class="section-title">Developer Dashboard</h2>
+            
+            <div class="dashboard-content">
+                <div class="dashboard-header">
+                    <h3>Your Staking Pools</h3>
+                </div>
+                
+                <div class="dashboard-pools" id="dashboard-pools">
+                    <!-- Developer pools will be inserted here -->
+                </div>
+                
+                <div id="no-dev-pools" class="no-pools">
+                    <img src="images/steak3.webp" alt="No pools found" width="200" height="200" loading="lazy">
+                    <h3>You haven't created any pools yet</h3>
+                    <p>Create your first staking pool to appear here</p>
+                    <a href="#create" class="btn primary-btn">Create Pool</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+        <p class="loading-text">Processing Transaction...</p>
+    </div>
+    
+    <!-- Notification System -->
+    <div class="notification-container" id="notification-container">
+        <!-- Notifications will be inserted here -->
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/steak.webp" alt="PulseChain Staking" width="40" height="40" loading="lazy">
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#explore">Explore Pools</a></li>
+                        <li><a href="#create">Create Pool</a></li>
+                        <li><a href="#dashboard">My Dashboard</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="https://scan.mypinata.cloud/ipfs/bafybeih3olry3is4e4lzm7rus5l3h6zrphcal5a7ayfkhzm5oivjro2cp4/#/address/0x474225793869203F436aCEF9CF251Dc137cE02cB?tab=contract">Verified Contract</a></li>
+                        <li><a href="whitepaper.html">White Paper</a></li>
+                        <li><a href="guide.html">Guide</a></li>
+                        <li><a href="poolca.html">Verify Your Pool</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h4>Connect With Us</h4>
+                    <div class="social-icons">
+                        <a href="https://t.me/singlesteak" target="_blank" class="social-icon" rel="noopener">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="https://x.com/singlesteak" target="_blank" class="social-icon" rel="noopener">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 SingleSteak. All rights reserved. Made by @GainRangerHeffe</p>
+            </div>
+        </div>
+    </footer>
+    
+    <div class="modal" id="wallet-modal">
+        <div class="modal-content wallet-modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Connect Wallet</h3>
+                <button class="close-modal" data-close-wallet-modal aria-label="Close wallet modal">&times;</button>
+            </div>
+        
+            <div class="modal-body">
+                <p class="modal-description">Select a wallet to connect:</p>
+            
+                <div class="wallet-options">
+                    <div class="wallet-option" data-wallet="metamask">
+                        <img src="images/metamask.png" alt="MetaMask" class="wallet-logo" width="32" height="32" loading="lazy" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg'">
+                        <span>MetaMask</span>
+                    </div>
+                
+                    <div class="wallet-option" data-wallet="okx">
+                        <img src="images/okx.png" alt="OKX Wallet" class="wallet-logo" width="32" height="32" loading="lazy" onerror="this.src='https://www.okx.com/cdn/assets/imgs/221/56386A2D5E13B91D.webp'">
+                        <span>OKX Wallet</span>
+                    </div>
+                
+                    <div class="wallet-option" data-wallet="rabby">
+                        <img src="images/rabby.png" alt="Rabby Wallet" class="wallet-logo" width="32" height="32" loading="lazy" onerror="this.src='https://rabby.io/assets/logo/rabby.svg'">
+                        <span>Rabby Wallet</span>
+                    </div>
+                    <div class="wallet-option" data-wallet="internetmoney">
+                        <img src="images/im.png" alt="Internet Money" class="wallet-logo" width="32" height="32" loading="lazy" onerror="this.src='https://internetmoney.io/assets/logo/internetmoney.svg'">
+                        <span>Internet Money</span>
+                    </div>
+                </div>
+            
+                <div class="wallet-info">
+                    <p style="text-align: center; margin-top: 20px; padding: 10px; background-color: rgba(255,255,255,0.05); border-radius: 8px;">
+                        <strong>This dApp only works with PulseChain</strong><br>
+                        Chain ID: 369 (0x171)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts - load with defer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.9.0/ethers.umd.min.js" defer></script>
+    <script src="app.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/ipfs-http-client/dist/index.min.js" defer></script>
+</body>
+</html>

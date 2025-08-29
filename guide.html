@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Steak: User Guide</title>
+    <!-- Meta tags for social sharing -->
+    <meta property="og:title" content="Single Steak: PulseChain Staking Platform">
+    <meta property="og:description" content="Create and manage single-sided staking pools for PulseChain projects">
+    <meta property="og:image" content="https://singlesteak.com/images/meta.webp">
+    <meta property="og:url" content="https://singlesteak.com/guide.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter/X card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Single Steak: PulseChain Staking Platform">
+    <meta name="twitter:description" content="A guide to create and manage single-sided staking pools for PulseChain projects on Single Steak">
+    <meta name="twitter:image" content="https://singlesteak.com/images/meta.webp">
+    <meta name="twitter:site" content="https://singlesteak.com/guide.html">
+    <!-- Favicon -->
+    <link rel="icon" href="images/steak.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <img src="images/steak.webp" alt="PulseChain Staking" id="site-logo">
+            </a>
+            
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html#explore" class="nav-link">Explore Pools</a></li>
+                    <li><a href="index.html#create" class="nav-link create-btn">Create Pool</a></li>
+                    <li><a href="index.html#dashboard" class="nav-link">My Dashboard</a></li>
+                </ul>
+            </nav>
+            
+            <div class="social-links">
+                <a href="https://t.me/gainrangerheffe" target="_blank" class="social-link">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://x.com/singlesteak" target="_blank" class="social-link">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+            </div>
+            
+            <button class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main class="whitepaper-content">
+    <div class="container">
+        <article class="whitepaper">
+            <header class="whitepaper-header">
+                <h1>SINGLE STEAK</h1>
+                <h2>PulseChain Single-Sided Staking Platform</h2>
+                <p class="whitepaper-version">User Guide v1.0</p>
+                <hr>
+            </header>
+
+            <section id="abstract">
+                <h3>Overview</h3>
+                <p>Single Steak is a decentralized platform built on PulseChain that allows token creators to establish single-sided staking pools for their tokens. This platform enables projects to offer staking rewards to their holders without requiring liquidity pairing, reducing impermanent loss risks while incentivizing holding. This guide explains how to use the platform for both token stakers and pool creators.</p>
+                <hr>
+            </section>
+
+            <section id="table-of-contents">
+                <h3>Table of Contents</h3>
+                <ol class="toc">
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#technical-overview">Technical Overview</a></li>
+                    <li><a href="#reward-distribution">How Reward Distribution Works</a></li>
+                    <li><a href="#user-guide">User Guide: Staking Tokens</a></li>
+                    <li><a href="#creating-pool">Creating Your Own Staking Pool</a></li>
+                    <li><a href="#advanced-technical">Advanced Technical Details</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#troubleshooting">Troubleshooting</a></li>
+                </ol>
+                <hr>
+            </section>
+
+            <section id="introduction">
+                <h2>1. Introduction</h2>
+                
+                <div class="subsection">
+                    <p>Single Steak is a decentralized platform built on PulseChain that allows token creators to establish single-sided staking pools for their tokens. This platform enables projects to offer staking rewards to their holders without requiring liquidity pairing, reducing impermanent loss risks while incentivizing holding.</p>
+                </div>
+                
+                <div class="subsection">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li><strong>Single-Sided Staking</strong>: Users stake only a single token type, eliminating impermanent loss</li>
+                        <li><strong>Customizable Rewards</strong>: Pool creators set and can adjust reward rates</li>
+                        <li><strong>No Lock-up Period</strong>: Users can unstake their tokens at any time</li>
+                        <li><strong>User-Friendly Interface</strong>: Easy-to-use dashboard for both stakers and pool creators</li>
+                        <li><strong>PulseChain Native</strong>: Optimized for PulseChain's low fees and fast transactions</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="technical-overview">
+                <h2>2. Technical Overview</h2>
+                
+                <div class="subsection">
+                    <h3>Contract Architecture</h3>
+                    <p>Single Steak uses a factory contract pattern:</p>
+                    <ol>
+                        <li><strong>StakingPoolFactory</strong>: The main contract that deploys individual staking pools</li>
+                        <li><strong>StakingPool</strong>: Individual pool contracts that handle token staking and reward distribution</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>Factory Contract Functionality</h3>
+                    <p>The factory contract serves as:</p>
+                    <ul>
+                        <li>A registry for all created staking pools</li>
+                        <li>A management system for pool creation fees</li>
+                        <li>A deployer for new staking pool contracts</li>
+                    </ul>
+                    <p>Pool creation incurs a small PLS fee (viewable on the creation page) which helps maintain the platform.</p>
+                </div>
+                
+                <div class="subsection">
+                    <h3>Staking Pool Contract Functionality</h3>
+                    <p>Each staking pool contract:</p>
+                    <ul>
+                        <li>Holds staked tokens and reward tokens</li>
+                        <li>Calculates and distributes rewards based on stake proportion</li>
+                        <li>Manages staking, unstaking, and reward claiming</li>
+                        <li>Applies a 24-hour timelock on reward rate changes (for security)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="reward-distribution">
+                <h2>3. How Reward Distribution Works</h2>
+                
+                <div class="subsection">
+                    <h3>Reward Math Explained</h3>
+                    <p>The reward system uses a pro-rata distribution model based on the proportion of tokens each user has staked:</p>
+                    <ol>
+                        <li><strong>Global Reward Rate</strong>: Each pool has a fixed reward rate (tokens per second) that applies to the entire pool</li>
+                        <li><strong>Proportional Distribution</strong>: Rewards are distributed proportionally based on each user's percentage of the total staked tokens</li>
+                        <li><strong>Fair Share Calculation</strong>: Your rewards = <span class="code-flow">(Your Stake / Total Stake) * Reward Rate * Time Staked</span></li>
+                    </ol>
+                    
+                    <h4>Example:</h4>
+                    <ul>
+                        <li>If a pool has a reward rate of 10 tokens per second</li>
+                        <li>Total staked in the pool = 1000 tokens</li>
+                        <li>Your stake = 100 tokens (10% of the pool)</li>
+                        <li>You will earn 1 token per second (10% of the 10 tokens/second)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <h3>APY Calculation</h3>
+                    <p>Annual Percentage Yield is calculated as:</p>
+                    <div class="formula">APY = (Reward Rate * Seconds in Year / Total Stake) * 100</div>
+                    <p>Important points about APY:</p>
+                    <ul>
+                        <li><strong>Same Percentage</strong>: All stakers in a pool earn the same APY percentage</li>
+                        <li><strong>Different Amounts</strong>: Larger stakes earn more tokens (but same percentage return)</li>
+                        <li><strong>Dynamic Value</strong>: As more tokens are staked, the APY changes for all participants</li>
+                        <li><strong>Initial Estimate</strong>: When creating a pool, the APY estimate is based on the initial reward amount and rate</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="user-guide">
+                <h2>4. User Guide: Staking Tokens</h2>
+                
+                <div class="subsection">
+                    <h3>Connecting Your Wallet</h3>
+                    <ol>
+                        <li>Visit <a href="https://singlesteak.com">singlesteak.com</a></li>
+                        <li>Click the "Connect Wallet" button in the top-right corner</li>
+                        <li>Select your preferred wallet (MetaMask, OKX Wallet, or Rabby Wallet)</li>
+                        <li>Ensure you're connected to PulseChain (Chain ID: 369 or 0x171)</li>
+                        <li>Approve the connection request in your wallet</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>Exploring Available Pools</h3>
+                    <ol>
+                        <li>Browse the available staking pools in the "Explore Pools" section</li>
+                        <li>Use the search bar to find specific token pools</li>
+                        <li>Sort pools by APY, TVL, or newest using the dropdown</li>
+                        <li>Each pool card shows:
+                            <ul>
+                                <li>Token name and symbol</li>
+                                <li>Current APY (annual percentage yield)</li>
+                                <li>TVL (total value locked)</li>
+                                <li>Your current stake and pending rewards (if connected)</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>Staking Your Tokens</h3>
+                    <ol>
+                        <li>Find the pool for the token you wish to stake</li>
+                        <li>Click the "View Details" button</li>
+                        <li>In the pool details modal, enter the amount you wish to stake
+                            <ul>
+                                <li>Use the "MAX" button to stake your entire balance</li>
+                            </ul>
+                        </li>
+                        <li>Click "Stake"</li>
+                        <li>Approve the token spending in your wallet when prompted</li>
+                        <li>Confirm the staking transaction</li>
+                        <li>Your stake will be visible in the "Your Position" section once confirmed</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>Claiming Rewards</h3>
+                    <ol>
+                        <li>Open the pool details for a pool where you have staked tokens</li>
+                        <li>View your pending rewards in the "Rewards" section</li>
+                        <li>Click "Claim Rewards" to transfer earned tokens to your wallet</li>
+                        <li>Confirm the transaction in your wallet</li>
+                        <li>Rewards will be sent to your wallet as the same token type as the staked token</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>Unstaking Tokens</h3>
+                    <ol>
+                        <li>Open the pool details for a pool where you have staked tokens</li>
+                        <li>In the "Unstake Tokens" section, enter the amount you wish to unstake
+                            <ul>
+                                <li>Use the "MAX" button to unstake all your staked tokens</li>
+                            </ul>
+                        </li>
+                        <li>Click "Unstake"</li>
+                        <li>Confirm the transaction in your wallet</li>
+                        <li>Your tokens will be returned to your wallet once the transaction is confirmed</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="creating-pool">
+                <h2>5. Creating Your Own Staking Pool</h2>
+                
+                <div class="subsection">
+                    <h3>Prerequisites</h3>
+                    <p>To create a staking pool, you need:</p>
+                    <ul>
+                        <li>A PulseChain ERC20 token with sufficient supply for rewards</li>
+                        <li>PLS to pay for transaction fees and pool creation fee</li>
+                        <li>Control of the token contract or sufficient token supply</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <h3>Step-by-Step Pool Creation</h3>
+                    <ol>
+                        <li>Connect your wallet to Single Steak</li>
+                        <li>Navigate to the "Create Pool" section</li>
+                        <li>Enter your token contract address
+                            <ul>
+                                <li>The app will auto-detect the token name and symbol</li>
+                            </ul>
+                        </li>
+                        <li>Set the initial reward rate (tokens per second)
+                            <ul>
+                                <li>This determines how quickly rewards are distributed</li>
+                            </ul>
+                        </li>
+                        <li>Set the initial rewards amount
+                            <ul>
+                                <li>This is the initial allocation of reward tokens</li>
+                            </ul>
+                        </li>
+                        <li>Enter a cash tag for your pool (used for generating a pool icon)</li>
+                        <li>Review the estimated APY based on your settings</li>
+                        <li>Click "Create Pool"</li>
+                        <li>Approve the token spending for initial rewards</li>
+                        <li>Confirm the creation transaction (includes the pool creation fee in PLS)</li>
+                        <li>Once confirmed, your pool will be visible in the "My Dashboard" section</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>Managing Your Pool</h3>
+                    <p>As a pool creator/owner, you can:</p>
+                    <ol>
+                        <li><strong>Add More Rewards</strong>:
+                            <ul>
+                                <li>Navigate to your pool in the dashboard</li>
+                                <li>Click "View Details"</li>
+                                <li>In the "Pool Management" section, enter the amount to add</li>
+                                <li>Approve and confirm the transaction</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update Reward Rate</strong>:
+                            <ul>
+                                <li>In the pool details, find the "Update Reward Rate" section</li>
+                                <li>Enter the new rate (tokens per second)</li>
+                                <li>Click "Schedule Update"</li>
+                                <li>After the 24-hour timelock expires, return to apply the update</li>
+                                <li>Click "Apply Update" to finalize the change</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="advanced-technical">
+                <h2>6. Advanced Technical Details</h2>
+                
+                <div class="subsection">
+                    <h3>Reward Rate Updates</h3>
+                    <p>For security reasons, reward rate changes are subject to a 24-hour timelock:</p>
+                    <ol>
+                        <li>Owner schedules a rate update by calling <span class="code-flow">scheduleRewardRateUpdate</span></li>
+                        <li>After 24 hours, the owner can call <span class="code-flow">applyRewardRateUpdate</span> to implement the change</li>
+                        <li>The pending update can be viewed in the pool management section</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>Reward Calculation Formula</h3>
+                    <p>The contract uses a "reward per token" system to efficiently track rewards:</p>
+                    <ul>
+                        <li><span class="code-flow">rewardPerToken = rewardPerTokenStored + (rewardRate * (timestamp - lastUpdateTime) / totalStaked)</span></li>
+                        <li>User rewards are calculated as: <span class="code-flow">rewards[user] + (balanceOf[user] * (rewardPerToken - userRewardPerTokenPaid[user]))</span></li>
+                    </ul>
+                    <p>This method ensures rewards are fairly calculated regardless of when users stake or claim.</p>
+                </div>
+            </section>
+
+            <section id="faq">
+                <h2>7. FAQ</h2>
+                
+                <div class="subsection">
+                    <h3>General Questions</h3>
+                    <div class="swot-item">
+                        <h4>Is there a lock-up period for staked tokens?</h4>
+                        <p>No, you can unstake your tokens at any time.</p>
+                    </div>
+                    
+                    <div class="swot-item">
+                        <h4>Are rewards automatically compounded?</h4>
+                        <p>No, rewards must be manually claimed. You can then re-stake them if desired.</p>
+                    </div>
+                    
+                    <div class="swot-item">
+                        <h4>What happens if the reward pool runs out?</h4>
+                        <p>When rewards are depleted, users will stop earning new rewards until the pool owner adds more.</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>APY Questions</h3>
+                    <div class="swot-item">
+                        <h4>Why does the APY change over time?</h4>
+                        <p>APY varies based on the total amount staked in the pool. As more tokens are staked, the same reward rate is distributed across more tokens, reducing the APY.</p>
+                    </div>
+                    
+                    <div class="swot-item">
+                        <h4>Does everyone in the pool get the same APY?</h4>
+                        <p>Yes, all stakers receive the same percentage return (APY), but the absolute number of tokens earned is proportional to their stake.</p>
+                    </div>
+                    
+                    <div class="swot-item">
+                        <h4>How is the estimated APY calculated during pool creation?</h4>
+                        <p>The initial APY estimate is calculated based on the reward rate and initial rewards: <span class="code-flow">(Yearly Rewards / Initial Rewards) * 100</span>.</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>Technical Questions</h3>
+                    <div class="swot-item">
+                        <h4>Can I use any ERC20 token to create a pool?</h4>
+                        <p>Yes, any PulseChain-compatible ERC20 token can be used.</p>
+                    </div>
+                    
+                    <div class="swot-item">
+                        <h4>Is the contract code audited?</h4>
+                        <p>[Include audit information if available]</p>
+                    </div>
+                    
+                    <div class="swot-item">
+                        <h4>What fees are involved?</h4>
+                        <p>There is a one-time pool creation fee paid in PLS. There are no ongoing fees for staking or unstaking.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>8. Troubleshooting</h2>
+                
+                <div class="subsection">
+                    <h3>Common Issues</h3>
+                    <div class="swot-item">
+                        <h4>Transaction Failing</h4>
+                        <ul>
+                            <li>Ensure you have enough PLS for gas</li>
+                            <li>Check that you've approved enough tokens for the transaction</li>
+                            <li>Verify you're connected to PulseChain</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="swot-item">
+                        <h4>Pool Not Showing</h4>
+                        <ul>
+                            <li>Refresh the page</li>
+                            <li>Reconnect your wallet</li>
+                            <li>Clear browser cache and try again</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="swot-item">
+                        <h4>Rewards Not Updating</h4>
+                        <ul>
+                            <li>Rewards are calculated in real-time but UI may need refreshing</li>
+                            <li>Check that the pool has sufficient reward tokens</li>
+                            <li>Verify the reward rate is not set to zero</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>Support</h3>
+                    <p>For additional help:</p>
+                    <ul>
+                        <li>Join our Telegram: <a href="https://t.me/gainrangerheffe" target="_blank">t.me/gainrangerheffe</a></li>
+                        <li>Follow on Twitter: <a href="https://twitter.com/singlesteak" target="_blank">@singlesteak</a></li>
+                        <li>Email support: <a href="mailto:support@singlesteak.com">support@singlesteak.com</a></li>
+                    </ul>
+                </div>
+            </section>
+        </article>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/steak.webp" alt="PulseChain Staking">
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#explore">Explore Pools</a></li>
+                    <li><a href="index.html#create">Create Pool</a></li>
+                    <li><a href="index.html#dashboard">My Dashboard</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Documentation</h4>
+                <ul>
+                    <li><a href="">Verfied Contract</a></li>
+                    <li><a href="whitepaper.html">White Paper</a></li>
+                    <li><a href="guide.html">Guide</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://t.me/gainrangerheffe" target="_blank" class="social-icon">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://x.com/singlesteak" target="_blank" class="social-icon">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 PulseChain Staking Platform. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Add this CSS to match your site styles -->
+<style>
+    .whitepaper-content {
+        padding: 160px 0 80px;
+    }
+    
+    .whitepaper {
+        background-color: var(--background-card);
+        border-radius: var(--border-radius-lg);
+        padding: 3rem;
+        box-shadow: var(--shadow-md);
+        color: var(--text-light);
+    }
+    
+    .whitepaper-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .whitepaper-header h1 {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .whitepaper-header h2 {
+        font-size: 1.8rem;
+        color: var(--text-dim);
+        margin-bottom: 1rem;
+    }
+    
+    .whitepaper-header h2::after {
+        display: none;
+    }
+    
+    .whitepaper-version {
+        font-style: italic;
+        color: var(--text-dim);
+        margin-bottom: 1.5rem;
+    }
+    
+    section {
+        margin-bottom: 3rem;
+    }
+    
+    section h2 {
+        color: var(--primary-light);
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        text-align: left;
+    }
+    
+    section h2::after {
+        left: 0;
+        transform: none;
+        background: var(--primary-light);
+    }
+    
+    .subsection {
+        margin-bottom: 2rem;
+    }
+    
+    .subsection h3 {
+        color: var(--secondary-color);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .subsection h4 {
+        color: var(--text-light);
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    ol, ul {
+        margin-left: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .toc {
+        list-style-type: decimal;
+    }
+    
+    .toc a {
+        color: var(--text-light);
+        text-decoration: none;
+        transition: color var(--transition-fast);
+    }
+    
+    .toc a:hover {
+        color: var(--primary-light);
+    }
+    
+    .code-flow {
+        background-color: var(--background-darker);
+        padding: 0.5rem 1rem;
+        border-radius: var(--border-radius-sm);
+        font-family: monospace;
+        margin: 0.5rem 0;
+        display: inline-block;
+    }
+    
+    .formula {
+        background-color: var(--background-darker);
+        padding: 1rem;
+        border-radius: var(--border-radius-md);
+        font-family: monospace;
+        font-size: 1.1rem;
+        margin: 1rem 0;
+        display: block;
+        text-align: center;
+    }
+    
+    .swot-item {
+        background-color: var(--background-darker);
+        padding: 1.5rem;
+        border-radius: var(--border-radius-md);
+        margin-bottom: 1rem;
+    }
+    
+    .swot-item h4 {
+        color: var(--primary-light);
+        margin-bottom: 0.5rem;
+    }
+    
+    .swot-item ul {
+        margin-left: 1.5rem;
+        margin-bottom: 0;
+    }
+    
+    /* Mobile Responsiveness */
+    @media (max-width: 992px) {
+        .whitepaper {
+            padding: 2rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .whitepaper-content {
+            padding: 120px 0 60px;
+        }
+        
+        .whitepaper {
+            padding: 1.5rem;
+        }
+        
+        .whitepaper-header h1 {
+            font-size: 2.2rem;
+        }
+        
+        .whitepaper-header h2 {
+            font-size: 1.4rem;
+        }
+        
+        section h2 {
+            font-size: 1.8rem;
+        }
+        
+        .subsection h3 {
+            font-size: 1.3rem;
+        }
+    }
+</style>
+
+<!-- Scripts (same as index.html) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.9.0/ethers.umd.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

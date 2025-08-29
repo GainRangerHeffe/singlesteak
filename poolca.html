@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Steak: Contract Verification Guide</title>
+    <!-- Meta tags for social sharing -->
+    <meta property="og:title" content="Single Steak: PulseChain Staking Platform">
+    <meta property="og:description" content="Create and manage single-sided staking pools for PulseChain projects">
+    <meta property="og:image" content="https://singlesteak.com/images/meta.webp">
+    <meta property="og:url" content="https://singlesteak.com/poolca.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter/X card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Single Steak: PulseChain Staking Platform">
+    <meta name="twitter:description" content="Create and manage single-sided staking pools for PulseChain projects">
+    <meta name="twitter:image" content="https://singlesteak.com/images/meta.webp">
+    <meta name="twitter:site" content="https://singlesteak.com/poolca.html">
+    <!-- Favicon -->
+    <link rel="icon" href="images/steak.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        .verification-guide {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            color: #ffffff;
+        }
+        
+        .guide-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .guide-section {
+            background: #2d2d2d;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #444;
+        }
+        
+        .step-number {
+            background: #ff6b35;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .step-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .code-block {
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #e0e0e0;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        .copy-btn:hover {
+            background: #e55a2b;
+        }
+        
+        .warning-box {
+            background: #2d1b0d;
+            border: 1px solid #ff9800;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .warning-box i {
+            color: #ff9800;
+            margin-right: 0.5rem;
+        }
+        
+        .info-box {
+            background: #0d1f2d;
+            border: 1px solid #007bff;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .info-box i {
+            color: #007bff;
+            margin-right: 0.5rem;
+        }
+        
+        .parameter-list {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .parameter-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #444;
+        }
+        
+        .parameter-item:last-child {
+            border-bottom: none;
+        }
+        
+        .parameter-name {
+            font-family: 'Courier New', monospace;
+            color: #ff6b35;
+        }
+        
+        .parameter-desc {
+            color: #ccc;
+            text-align: right;
+            flex: 1;
+            margin-left: 1rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #ff6b35;
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+        
+        .back-link:hover {
+            color: #e55a2b;
+        }
+        
+        .back-link i {
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="verification-guide">
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Single Steak
+        </a>
+        
+        <div class="guide-header">
+            <h1><img src="images/steak.webp" alt="PulseChain Staking" id="site-logo" width="40" height="40" loading="eager"></i> Contract Verification Guide</h1>
+            <p>Learn how to verify your staking pool contract on PulseScan</p>
+        </div>
+
+        <div class="guide-section">
+            <h2>Why Verify Your Contract?</h2>
+            <p>Contract verification provides transparency and trust by:</p>
+            <ul>
+                <li><strong>Source Code Visibility:</strong> Users can read the contract's source code</li>
+                <li><strong>Security Assurance:</strong> Proves the contract does exactly what it claims</li>
+                <li><strong>Trust Building:</strong> Shows professionalism and transparency</li>
+                <li><strong>Block Explorer Integration:</strong> Better interaction with PulseScan</li>
+            </ul>
+        </div>
+
+        <div class="guide-section">
+            <div class="step-title">
+                <span class="step-number">1</span>
+                <h3>Get Your Pool Contract Address</h3>
+            </div>
+            
+            <p>First, you'll need your pool's contract address. You can find this in:</p>
+            <ul>
+                <li>Your developer dashboard (click the address to copy)</li>
+                <li>The success notification when you created the pool</li>
+                <li>The pool details modal if you're the owner</li>
+            </ul>
+            
+            <div class="info-box">
+                <i class="fas fa-info-circle"></i>
+                <strong>Note:</strong> Each staking pool has its own unique contract address, separate from the factory contract.
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <div class="step-title">
+                <span class="step-number">2</span>
+                <h3>Go to PulseScan</h3>
+            </div>
+            
+            <p>Navigate to <a href="https://scan.pulsechain.com" target="_blank" style="color: #ff6b35;">https://scan.pulsechain.com</a> and:</p>
+            <ol>
+                <li>Search for your pool contract address</li>
+                <li>Click on the contract address in the results</li>
+                <li>Go to the "Contract" tab</li>
+                <li>Click "Verify and Publish"</li>
+            </ol>
+        </div>
+
+        <div class="guide-section">
+            <div class="step-title">
+                <span class="step-number">3</span>
+                <h3>Select Verification Method</h3>
+            </div>
+            
+            <p>Choose the following options:</p>
+            <ul>
+                <li><strong>Compiler Type:</strong> Solidity (Single file)</li>
+                <li><strong>Compiler Version:</strong> v0.8.20+commit.a1b79de6</li>
+                <li><strong>Open Source License:</strong> MIT License (MIT)</li>
+            </ul>
+        </div>
+
+        <div class="guide-section">
+            <div class="step-title">
+                <span class="step-number">4</span>
+                <h3>Paste the Contract Source Code</h3>
+            </div>
+            
+            <p>Copy and paste the following contract code into the source code field:</p>
+            
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyContractCode()">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+                <pre id="contract-code">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
+/**
+ * @title StakingPool
+ * @dev Single-sided staking pool with time-locked reward rate adjustments
+ */
+contract StakingPool is Ownable, ReentrancyGuard {
+    using SafeERC20 for IERC20;
+
+    // Token being staked
+    IERC20 public stakingToken;
+    
+    // Token info
+    string public tokenName;
+    string public tokenSymbol;
+    string public poolImageUrl;
+    
+    // Staking data
+    uint256 public totalStaked;
+    uint256 public rewardRate; // Tokens per second
+    uint256 public lastUpdateTime;
+    uint256 public rewardPerTokenStored;
+    
+    // Time lock for reward rate changes
+    uint256 public constant TIMELOCK_DURATION = 24 hours;
+    uint256 public pendingRewardRate;
+    uint256 public rewardRateUpdateTime;
+    bool public rewardRateUpdatePending;
+    
+    // User data mapping
+    mapping(address => uint256) public userStakedAmount;
+    mapping(address => uint256) public rewards;
+    mapping(address => uint256) public userRewardPerTokenPaid;
+
+    // Events
+    event Staked(address indexed user, uint256 amount);
+    event Withdrawn(address indexed user, uint256 amount);
+    event RewardsClaimed(address indexed user, uint256 amount);
+    event RewardRateUpdateScheduled(uint256 oldRate, uint256 newRate, uint256 effectiveTime);
+    event RewardRateUpdated(uint256 newRate);
+    event PoolInfoUpdated(string tokenName, string tokenSymbol, string poolImageUrl);
+
+    /**
+     * @dev Constructor to initialize the staking pool
+     * @param _stakingToken Address of the token being staked
+     * @param _tokenName Name of the token
+     * @param _tokenSymbol Symbol of the token
+     * @param _poolImageUrl URL of the pool image
+     * @param _initialRewardRate Initial reward rate (tokens per second)
+     * @param _owner Address of the pool owner
+     */
+    constructor(
+        address _stakingToken,
+        string memory _tokenName,
+        string memory _tokenSymbol,
+        string memory _poolImageUrl,
+        uint256 _initialRewardRate,
+        address _owner
+    ) Ownable(_owner) {
+        stakingToken = IERC20(_stakingToken);
+        tokenName = _tokenName;
+        tokenSymbol = _tokenSymbol;
+        poolImageUrl = _poolImageUrl;
+        rewardRate = _initialRewardRate;
+        lastUpdateTime = block.timestamp;
+    }
+
+    /**
+     * @dev Update pool information
+     * @param _tokenName New token name
+     * @param _tokenSymbol New token symbol
+     * @param _poolImageUrl New pool image URL
+     */
+    function updatePoolInfo(
+        string memory _tokenName,
+        string memory _tokenSymbol,
+        string memory _poolImageUrl
+    ) external onlyOwner {
+        tokenName = _tokenName;
+        tokenSymbol = _tokenSymbol;
+        poolImageUrl = _poolImageUrl;
+        
+        emit PoolInfoUpdated(_tokenName, _tokenSymbol, _poolImageUrl);
+    }
+
+    /**
+     * @dev Schedule a reward rate update (time-locked)
+     * @param _newRewardRate New reward rate to be applied after timelock
+     */
+    function scheduleRewardRateUpdate(uint256 _newRewardRate) external onlyOwner {
+        _updateReward(address(0));
+        
+        pendingRewardRate = _newRewardRate;
+        rewardRateUpdateTime = block.timestamp + TIMELOCK_DURATION;
+        rewardRateUpdatePending = true;
+        
+        emit RewardRateUpdateScheduled(rewardRate, _newRewardRate, rewardRateUpdateTime);
+    }
+
+    /**
+     * @dev Apply pending reward rate update after timelock expires
+     */
+    function applyRewardRateUpdate() external {
+        require(rewardRateUpdatePending, "No pending reward rate update");
+        require(block.timestamp >= rewardRateUpdateTime, "Timelock not expired");
+        
+        _updateReward(address(0));
+        
+        rewardRate = pendingRewardRate;
+        rewardRateUpdatePending = false;
+        
+        emit RewardRateUpdated(rewardRate);
+    }
+
+    /**
+     * @dev Calculate reward per token
+     * @return Accumulated reward per token
+     */
+    function rewardPerToken() public view returns (uint256) {
+        if (totalStaked == 0) {
+            return rewardPerTokenStored;
+        }
+        
+        return rewardPerTokenStored + (
+            ((block.timestamp - lastUpdateTime) * rewardRate * 1e18) / totalStaked
+        );
+    }
+
+    /**
+     * @dev Calculate pending rewards for a user
+     * @param account User address
+     * @return Pending reward amount
+     */
+    function earned(address account) public view returns (uint256) {
+        return (
+            (userStakedAmount[account] * (rewardPerToken() - userRewardPerTokenPaid[account])) / 1e18
+        ) + rewards[account];
+    }
+
+    /**
+     * @dev Update reward calculations
+     * @param account User address
+     */
+    function _updateReward(address account) internal {
+        rewardPerTokenStored = rewardPerToken();
+        lastUpdateTime = block.timestamp;
+        
+        if (account != address(0)) {
+            rewards[account] = earned(account);
+            userRewardPerTokenPaid[account] = rewardPerTokenStored;
+        }
+    }
+    
+    /**
+     * @dev Modifier to update rewards before function execution
+     * @param account User address
+     */
+    modifier updateReward(address account) {
+        _updateReward(account);
+        _;
+    }
+    
+    /**
+     * @dev Add rewards to the staking pool
+     * @param amount Amount of tokens to add as rewards
+     */
+    function addRewards(uint256 amount) external onlyOwner {
+        require(amount > 0, "Cannot add zero rewards");
+        
+        stakingToken.safeTransferFrom(msg.sender, address(this), amount);
+    }
+
+    /**
+     * @dev Stake tokens
+     * @param amount Amount to stake
+     */
+    function stake(uint256 amount) external nonReentrant updateReward(msg.sender) {
+        require(amount > 0, "Cannot stake 0");
+        
+        totalStaked += amount;
+        userStakedAmount[msg.sender] += amount;
+        
+        stakingToken.safeTransferFrom(msg.sender, address(this), amount);
+        
+        emit Staked(msg.sender, amount);
+    }
+
+    /**
+     * @dev Withdraw staked tokens
+     * @param amount Amount to withdraw
+     */
+    function withdraw(uint256 amount) external nonReentrant updateReward(msg.sender) {
+        require(amount > 0, "Cannot withdraw 0");
+        require(userStakedAmount[msg.sender] >= amount, "Not enough staked");
+        
+        totalStaked -= amount;
+        userStakedAmount[msg.sender] -= amount;
+        
+        stakingToken.safeTransfer(msg.sender, amount);
+        
+        emit Withdrawn(msg.sender, amount);
+    }
+
+    /**
+     * @dev Claim accumulated rewards
+     */
+    function claimRewards() external nonReentrant updateReward(msg.sender) {
+        uint256 reward = rewards[msg.sender];
+        
+        if (reward > 0) {
+            rewards[msg.sender] = 0;
+            stakingToken.safeTransfer(msg.sender, reward);
+            
+            emit RewardsClaimed(msg.sender, reward);
+        }
+    }
+
+    /**
+     * @dev Exit staking and claim rewards
+     */
+    function exit() external nonReentrant updateReward(msg.sender) {
+        uint256 amount = userStakedAmount[msg.sender];
+        if (amount > 0) {
+            totalStaked -= amount;
+            userStakedAmount[msg.sender] = 0;
+            stakingToken.safeTransfer(msg.sender, amount);
+            emit Withdrawn(msg.sender, amount);
+        }
+        
+        uint256 reward = rewards[msg.sender];
+        if (reward > 0) {
+            rewards[msg.sender] = 0;
+            stakingToken.safeTransfer(msg.sender, reward);
+            emit RewardsClaimed(msg.sender, reward);
+        }
+    }
+
+    /**
+     * @dev Get current APY
+     * @return Annual percentage yield (scaled by 1e18)
+     */
+    function getAPY() external view returns (uint256) {
+        if (totalStaked == 0) return 0;
+        
+        // Calculate yearly rewards based on current rate
+        uint256 yearlyRewards = rewardRate * 365 days;
+        
+        // APY = (yearlyRewards / totalStaked) * 100 * 1e18
+        return (yearlyRewards * 100 * 1e18) / totalStaked;
+    }
+}</pre>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <div class="step-title">
+                <span class="step-number">5</span>
+                <h3>Enter Constructor Parameters</h3>
+            </div>
+            
+            <p>You'll need to enter the exact parameters used when your pool was created. These are:</p>
+            
+            <div class="parameter-list">
+                <div class="parameter-item">
+                    <span class="parameter-name">_stakingToken</span>
+                    <span class="parameter-desc">Your token's contract address</span>
+                </div>
+                <div class="parameter-item">
+                    <span class="parameter-name">_tokenName</span>
+                    <span class="parameter-desc">Token name you entered (e.g., "My Token")</span>
+                </div>
+                <div class="parameter-item">
+                    <span class="parameter-name">_tokenSymbol</span>
+                    <span class="parameter-desc">Token symbol you entered (e.g., "MTK")</span>
+                </div>
+                <div class="parameter-item">
+                    <span class="parameter-name">_poolImageUrl</span>
+                    <span class="parameter-desc">IPFS URL or data URL of your pool image</span>
+                </div>
+                <div class="parameter-item">
+                    <span class="parameter-name">_initialRewardRate</span>
+                    <span class="parameter-desc">Calculated reward rate (very small number)</span>
+                </div>
+                <div class="parameter-item">
+                    <span class="parameter-name">_owner</span>
+                    <span class="parameter-desc">Your wallet address</span>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>Important:</strong> All parameters must be exactly as they were when the pool was created. If you're unsure about any values, you can view them by reading the contract on PulseScan before verification.
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <div class="step-title">
+                <span class="step-number">6</span>
+                <h3>Complete Verification</h3>
+            </div>
+            
+            <p>After entering all information:</p>
+            <ol>
+                <li>Double-check all parameters are correct</li>
+                <li>Click "Verify and Publish"</li>
+                <li>Wait for the verification process to complete</li>
+                <li>You should see a green checkmark indicating success!</li>
+            </ol>
+            
+            <div class="info-box">
+                <i class="fas fa-check-circle"></i>
+                <strong>Success!</strong> Once verified, users will be able to read your contract's source code directly on PulseScan, increasing trust and transparency.
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2>Troubleshooting</h2>
+            
+            <h4>Common Issues:</h4>
+            <ul>
+                <li><strong>Constructor parameter mismatch:</strong> Make sure all parameters exactly match what was used during deployment</li>
+                <li><strong>Wrong compiler version:</strong> Use exactly v0.8.20+commit.a1b79de6</li>
+                <li><strong>Library imports:</strong> The OpenZeppelin imports should resolve automatically</li>
+                <li><strong>Optimization settings:</strong> Try both enabled and disabled if verification fails</li>
+            </ul>
+            
+            <p>If you continue having issues, you can contact support or ask for help in the community.</p>
+        </div>
+    </div>
+
+    <script>
+        function copyContractCode() {
+            const codeElement = document.getElementById('contract-code');
+            const textToCopy = codeElement.textContent;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const button = document.querySelector('.copy-btn');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                button.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '#ff6b35';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Contract code copied to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>

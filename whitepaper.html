@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Steak: A Single-Sided Staking Protocol for PulseChain</title>
+    <!-- Meta tags for social sharing -->
+    <meta property="og:title" content="Single Steak: PulseChain Staking Platform">
+    <meta property="og:description" content="Create and manage single-sided staking pools for PulseChain projects">
+    <meta property="og:image" content="https://singlesteak.com/images/meta.webp">
+    <meta property="og:url" content="https://singlesteak.com/whitepaper.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter/X card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Single Steak: PulseChain Staking Platform">
+    <meta name="twitter:description" content="Create and manage single-sided staking pools for PulseChain projects">
+    <meta name="twitter:image" content="https://singlesteak.com/images/meta.webp">
+    <meta name="twitter:site" content="https://singlesteak.com/whitepaper.html">
+    <!-- Favicon -->
+    <link rel="icon" href="images/steak.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <img src="images/steak.webp" alt="PulseChain Staking" id="site-logo">
+            </a>
+            
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html#explore" class="nav-link">Explore Pools</a></li>
+                    <li><a href="index.html#create" class="nav-link create-btn">Create Pool</a></li>
+                    <li><a href="index.html#dashboard" class="nav-link">My Dashboard</a></li>
+                </ul>
+            </nav>
+            
+            <div class="social-links">
+                <a href="https://t.me/gainrangerheffe" target="_blank" class="social-link">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://x.com/singlesteak" target="_blank" class="social-link">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+            </div>
+            
+            <button class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main class="whitepaper-content">
+    <div class="container">
+        <article class="whitepaper">
+            <header class="whitepaper-header">
+                <h1>SINGLE STEAK</h1>
+                <h2>A Single-Sided Staking Protocol for PulseChain</h2>
+                <p class="whitepaper-version">Version 1.0.0</p>
+                <hr>
+            </header>
+
+            <section id="abstract">
+                <h3>Abstract</h3>
+                <p>Single Steak introduces a permissionless single-sided staking protocol built on PulseChain, designed to address the limitations of traditional liquidity mining and two-sided staking mechanisms. This paper outlines the economic and technical foundations of Single Steak, examining how our protocol enables token issuers to create customizable staking pools without the drawbacks of impermanent loss while providing token holders with predictable rewards structures. By eliminating the requirement for secondary tokens in staking pairs, Single Steak creates a more accessible, flexible, and sustainable tokenomic structure for emerging PulseChain projects and their communities.</p>
+                <hr>
+            </section>
+
+            <section id="table-of-contents">
+                <h3>Table of Contents</h3>
+                <ol class="toc">
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#market-analysis">Market Analysis</a></li>
+                    <li><a href="#protocol-overview">Protocol Overview</a></li>
+                    <li><a href="#technical-architecture">Technical Architecture</a></li>
+                    <li><a href="#tokenomics">Tokenomics and Reward Distribution</a></li>
+                    <li><a href="#implementation">Implementation</a></li>
+                    <li><a href="#security">Security Considerations</a></li>
+                    <li><a href="#governance">Governance</a></li>
+                    <li><a href="#roadmap">Roadmap</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                    <li><a href="#references">References</a></li>
+                </ol>
+                <hr>
+            </section>
+
+            <section id="introduction">
+                <h2>1. Introduction</h2>
+                
+                <div class="subsection">
+                    <h3>1.1 Background</h3>
+                    <p>Staking and yield farming have emerged as fundamental mechanisms within decentralized finance (DeFi), providing incentives for token holders to contribute to protocol stability and liquidity. However, traditional approaches to staking, especially those requiring liquidity pairs, come with significant drawbacks—most notably impermanent loss, where the value of deposits can decline relative to a simple hold strategy due to price divergence in the token pair.</p>
+                    <p>PulseChain, as an energy-efficient Ethereum fork, presents unique opportunities for innovative DeFi mechanisms. The ecosystem's focus on lower fees and faster transactions creates an ideal environment for a next-generation staking protocol that addresses existing limitations while taking advantage of PulseChain's technical benefits.</p>
+                </div>
+                
+                <div class="subsection">
+                    <h3>1.2 Problem Statement</h3>
+                    <p>Current staking models on PulseChain and other blockchain platforms face several challenges:</p>
+                    <ol>
+                        <li><strong>Impermanent Loss</strong>: Traditional liquidity provision requires pairing tokens, exposing liquidity providers to potential losses when token prices diverge.</li>
+                        <li><strong>Capital Inefficiency</strong>: Two-sided staking demands greater capital commitments and splits rewards across token pairs.</li>
+                        <li><strong>Complexity</strong>: Managing liquidity positions, understanding impermanent loss, and optimizing for rewards creates a high barrier to entry.</li>
+                        <li><strong>Protocol Sustainability</strong>: Many yield farming and staking mechanisms fail to create sustainable, long-term token models.</li>
+                        <li><strong>Inflexible Reward Mechanisms</strong>: Projects struggle to adjust incentives based on changing market conditions or project stages.</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>1.3 Solution Overview</h3>
+                    <p>Single Steak addresses these challenges by providing a permissionless platform for creating and managing single-sided staking pools on PulseChain. The protocol enables:</p>
+                    <ul>
+                        <li>Creation of token-specific staking pools without requiring a paired asset</li>
+                        <li>Customizable reward rates with security-focused timelock mechanisms</li>
+                        <li>Pro-rata reward distribution based on stake proportion</li>
+                        <li>Transparent, predictable APY calculations</li>
+                        <li>Flexible pool management options for project teams</li>
+                        <li>User-friendly interfaces for both stakers and pool creators</li>
+                    </ul>
+                    <p>By focusing exclusively on single-sided staking, Single Steak eliminates impermanent loss while providing a simpler, more accessible staking experience for users and more effective tokenomic tools for projects.</p>
+                </div>
+            </section>
+
+            <section id="market-analysis">
+                <h2>2. Market Analysis</h2>
+                
+                <div class="subsection">
+                    <h3>2.1 Staking Landscape</h3>
+                    <p>The total value locked (TVL) in staking protocols across all blockchains exceeds tens of billions of dollars as of 2025, demonstrating the significant demand for yield-generating mechanisms in the crypto ecosystem. However, the market exhibits several trends that Single Steak is positioned to address:</p>
+                    <ol>
+                        <li><strong>Growing Concerns about IL</strong>: As markets have experienced high volatility, awareness of impermanent loss has increased, leading to demand for alternative staking methods.</li>
+                        <li><strong>Proliferation of New Tokens</strong>: PulseChain's growing ecosystem requires accessible tokenomic tools for new projects.</li>
+                        <li><strong>Simplified DeFi</strong>: There is a clear market trend toward more user-friendly DeFi implementations that reduce complexity.</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>2.2 Target Market</h3>
+                    <p>Single Steak serves two primary market segments:</p>
+                    <ol>
+                        <li>
+                            <strong>Token Projects/DAOs</strong>:
+                            <ul>
+                                <li>New PulseChain projects seeking to establish tokenomic mechanisms</li>
+                                <li>Existing projects looking to enhance token utility and holder incentives</li>
+                                <li>DAOs managing community tokens</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Token Holders</strong>:
+                            <ul>
+                                <li>PulseChain users seeking yield opportunities</li>
+                                <li>Long-term token holders looking for rewards without additional exposure</li>
+                                <li>DeFi participants concerned about impermanent loss</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>2.3 Competitive Analysis</h3>
+                    <p>While staking protocols exist across multiple chains, Single Steak differentiates through:</p>
+                    <div class="table-responsive">
+                        <table class="competitive-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Single Steak</th>
+                                    <th>Traditional LP Staking</th>
+                                    <th>Basic Token Staking</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Impermanent Loss</td>
+                                    <td>None</td>
+                                    <td>High</td>
+                                    <td>None</td>
+                                </tr>
+                                <tr>
+                                    <td>Capital Efficiency</td>
+                                    <td>High</td>
+                                    <td>Medium</td>
+                                    <td>High</td>
+                                </tr>
+                                <tr>
+                                    <td>Reward Flexibility</td>
+                                    <td>Customizable</td>
+                                    <td>Limited</td>
+                                    <td>Limited</td>
+                                </tr>
+                                <tr>
+                                    <td>User Complexity</td>
+                                    <td>Low</td>
+                                    <td>High</td>
+                                    <td>Low</td>
+                                </tr>
+                                <tr>
+                                    <td>Pool Creation</td>
+                                    <td>Permissionless</td>
+                                    <td>Platform-dependent</td>
+                                    <td>Requires Custom Contract</td>
+                                </tr>
+                                <tr>
+                                    <td>PulseChain Optimized</td>
+                                    <td>Yes</td>
+                                    <td>Limited</td>
+                                    <td>Limited</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>2.4 SWOT Analysis</h3>
+                    <div class="swot-grid">
+                        <div class="swot-item">
+                            <h4>Strengths</h4>
+                            <ul>
+                                <li>Elimination of impermanent loss</li>
+                                <li>Simplified user experience</li>
+                                <li>Customizable reward structures</li>
+                                <li>Native PulseChain integration</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="swot-item">
+                            <h4>Weaknesses</h4>
+                            <ul>
+                                <li>No incentivization for liquidity provision</li>
+                                <li>Dependent on individual projects' token economics</li>
+                                <li>New protocol without established history</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="swot-item">
+                            <h4>Opportunities</h4>
+                            <ul>
+                                <li>Growing PulseChain ecosystem</li>
+                                <li>Increasing awareness of impermanent loss issues</li>
+                                <li>Trend toward user-friendly DeFi</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="swot-item">
+                            <h4>Threats</h4>
+                            <ul>
+                                <li>Potential competition from multi-chain staking protocols</li>
+                                <li>Regulatory changes affecting staking programs</li>
+                                <li>General market downturns affecting TVL across DeFi</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="protocol-overview">
+                <h2>3. Protocol Overview</h2>
+                
+                <div class="subsection">
+                    <h3>3.1 Core Principles</h3>
+                    <p>Single Steak is designed around four core principles:</p>
+                    <ol>
+                        <li><strong>Simplicity</strong>: The protocol emphasizes user-friendly interfaces and straightforward mechanics.</li>
+                        <li><strong>Flexibility</strong>: Customizable reward rates and pool parameters allow projects to tailor staking programs.</li>
+                        <li><strong>Security</strong>: Time-locked updates and secure contract design protect both stakers and pool creators.</li>
+                        <li><strong>Transparency</strong>: All reward calculations, APYs, and pool statistics are fully transparent.</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>3.2 Key Participants</h3>
+                    <p>The protocol involves three main participant types:</p>
+                    <ol>
+                        <li><strong>Stakers</strong>: Users who deposit tokens into staking pools to earn rewards.</li>
+                        <li><strong>Pool Creators</strong>: Projects or individuals who establish staking pools and provide initial rewards.</li>
+                        <li><strong>Platform Maintainers</strong>: Protocol developers who maintain the platform and receive pool creation fees.</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>3.3 Workflow Overview</h3>
+                    <div class="diagram-container">
+                        <img src="images/workflow.png" alt="Protocol Workflow" class="protocol-diagram">
+                    </div>
+                    <p>The protocol follows a simple workflow:</p>
+                    <ol>
+                        <li>A pool creator deploys a new staking pool via the factory contract, setting initial parameters and providing reward tokens.</li>
+                        <li>Stakers discover the pool and deposit tokens.</li>
+                        <li>Rewards accrue to stakers in real-time based on their proportion of the total stake.</li>
+                        <li>Stakers can claim rewards or unstake at any time without penalties.</li>
+                        <li>Pool creators can add rewards or adjust rates (subject to timelock) to maintain the pool.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="technical-architecture">
+                <h2>4. Technical Architecture</h2>
+                
+                <div class="subsection">
+                    <h3>4.1 Contract Structure</h3>
+                    <p>Single Steak employs a factory pattern with two primary contract types:</p>
+                    <ol>
+                        <li>
+                            <strong>StakingPoolFactory Contract</strong>:
+                            <ul>
+                                <li>Central registry for all staking pools</li>
+                                <li>Handles pool creation and configuration</li>
+                                <li>Manages platform fees</li>
+                                <li>Maintains pool metadata</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>StakingPool Contract</strong>:
+                            <ul>
+                                <li>Manages token staking and withdrawal</li>
+                                <li>Calculates and distributes rewards</li>
+                                <li>Enforces timelocks on parameter changes</li>
+                                <li>Tracks user positions and rewards</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>4.2 Contract Interactions</h3>
+                    <div class="diagram-container">
+                        <img src="images/contract.png" alt="Contract Interaction Diagram" class="contract-diagram">
+                    </div>
+                    <p>Key interactions within the system include:</p>
+                    <ul>
+                        <li>
+                            <strong>Pool Creation</strong>:
+                            <pre class="code-flow">Pool Creator -> StakingPoolFactory -> StakingPool</pre>
+                        </li>
+                        <li>
+                            <strong>Staking Process</strong>:
+                            <pre class="code-flow">Staker -> StakingPool -> Token Contract</pre>
+                        </li>
+                        <li>
+                            <strong>Reward Distribution</strong>:
+                            <pre class="code-flow">StakingPool -> Staker</pre>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <h3>4.3 Technical Specifications</h3>
+                    <p>The protocol implements several technical features:</p>
+                    <ol>
+                        <li>
+                            <strong>Reward Distribution System</strong>:
+                            <ul>
+                                <li>Pro-rata rewards based on proportional stake</li>
+                                <li>Continuous accrual model using "reward per token" accounting</li>
+                                <li>Optimized for gas efficiency through specialized calculation methods</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Timelock Mechanism</strong>:
+                            <ul>
+                                <li>24-hour delay on reward rate changes</li>
+                                <li>Two-phase commit process for parameter updates</li>
+                                <li>Cannot be bypassed, even by pool owner</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>ERC20 Compatibility</strong>:
+                            <ul>
+                                <li>Compatible with all standard ERC20 tokens on PulseChain</li>
+                                <li>No modifications to token contracts required</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Pool Metadata Storage</strong>:
+                            <ul>
+                                <li>On-chain storage of essential pool information</li>
+                                <li>SVG-based dynamic pool icons generated from cash tags</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>4.4 User Interface Integration</h3>
+                    <p>The protocol's front-end components include:</p>
+                    <ol>
+                        <li><strong>Pool Explorer</strong>: Searchable, filterable interface for discovering staking pools</li>
+                        <li><strong>Staking Dashboard</strong>: User-focused interface showing positions and rewards</li>
+                        <li><strong>Pool Creation Interface</strong>: Step-by-step wizard for creating new staking pools</li>
+                        <li><strong>Pool Management Dashboard</strong>: Tools for pool creators to manage existing pools</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="tokenomics">
+                <h2>5. Tokenomics and Reward Distribution</h2>
+                
+                <div class="subsection">
+                    <h3>5.1 Reward Mechanism</h3>
+                    <p>Single Steak implements a sophisticated reward distribution system based on the following principles:</p>
+                    <ol>
+                        <li><strong>Time-Based Accrual</strong>: Rewards accrue continuously based on each user's stake proportion.</li>
+                        <li><strong>Pro-Rata Distribution</strong>: Rewards are allocated proportionally to each staker's share of the total pool.</li>
+                        <li><strong>Global Rate Governance</strong>: Pool creators set a global reward rate that applies universally.</li>
+                    </ol>
+                    <p>The core reward formula is:</p>
+                    <pre class="formula">UserReward = (UserStake / TotalStaked) * RewardRate * TimePeriod</pre>
+                    <p>Where:</p>
+                    <ul>
+                        <li>UserStake is the amount staked by a specific user</li>
+                        <li>TotalStaked is the sum of all tokens staked in the pool</li>
+                        <li>RewardRate is the tokens distributed per second</li>
+                        <li>TimePeriod is the duration in seconds</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <h3>5.2 APY Calculation</h3>
+                    <p>Annual Percentage Yield (APY) is calculated as:</p>
+                    <pre class="formula">APY = (RewardRate * SecondsPerYear / TotalStaked) * 100</pre>
+                    <p>This provides a standardized metric for comparing pools. Important characteristics of the APY mechanism:</p>
+                    <ol>
+                        <li>All users within a pool receive the same APY percentage</li>
+                        <li>APY decreases as more tokens are staked (assuming constant reward rate)</li>
+                        <li>Pool creators can adjust the reward rate to target specific APY ranges</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>5.3 Fee Structure</h3>
+                    <p>The protocol implements a minimal fee structure:</p>
+                    <ol>
+                        <li><strong>Pool Creation Fee</strong>: One-time fee paid in PLS when creating a new pool</li>
+                        <li><strong>No Ongoing Fees</strong>: No fees for staking, unstaking, or claiming rewards</li>
+                        <li><strong>No Protocol Token</strong>: The platform operates without requiring its own token</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>5.4 Economic Incentives</h3>
+                    <p>The economic design creates aligned incentives for all participants:</p>
+                    <ol>
+                        <li>
+                            <strong>For Stakers</strong>:
+                            <ul>
+                                <li>Rewards proportional to commitment</li>
+                                <li>No impermanent loss risk</li>
+                                <li>Flexibility to enter/exit at will</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>For Pool Creators</strong>:
+                            <ul>
+                                <li>Enhanced token utility</li>
+                                <li>Community engagement</li>
+                                <li>Strategic control over incentives</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>For Platform Maintainers</strong>:
+                            <ul>
+                                <li>Sustainable income from creation fees</li>
+                                <li>Growth incentives tied to platform adoption</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="implementation">
+                <h2>6. Implementation</h2>
+                
+                <div class="subsection">
+                    <h3>6.1 Smart Contract Implementation</h3>
+                    <p>The core contracts are implemented in Solidity, optimized for the PulseChain environment. Key implementation details include:</p>
+                    <div class="code-block">
+                        <h4>StakingPoolFactory.sol:</h4>
+                        <pre class="code">
+// Factory contract excerpt
+function createPool(
+    address stakingToken,
+    string calldata tokenName,
+    string calldata tokenSymbol,
+    string calldata poolImageUrl,
+    uint256 initialRewardRate
+) external payable returns (address) {
+    require(msg.value >= poolCreationFee, "Insufficient creation fee");
+    
+    // Deploy new staking pool
+    StakingPool newPool = new StakingPool(
+        stakingToken,
+        tokenName,
+        tokenSymbol,
+        poolImageUrl,
+        initialRewardRate,
+        msg.sender
+    );
+    
+    // Register pool
+    stakingPools.push(address(newPool));
+    developerPools[msg.sender].push(address(newPool));
+    
+    // Transfer fee to recipient
+    payable(feeRecipient).transfer(msg.value);
+    
+    emit PoolCreated(address(newPool), stakingToken, msg.sender);
+    return address(newPool);
+}</pre>
+                    </div>
+                    
+                    <div class="code-block">
+                        <h4>StakingPool.sol:</h4>
+                        <pre class="code">
+// Reward calculation excerpt
+function rewardPerToken() public view returns (uint256) {
+    if (totalStaked == 0) {
+        return rewardPerTokenStored;
+    }
+    
+    return rewardPerTokenStored + (
+        ((lastTimeRewardApplicable() - lastUpdateTime) * rewardRate * 1e18) / totalStaked
+    );
+}
+
+function earned(address account) public view returns (uint256) {
+    return (
+        userStakedAmount[account] * 
+        (rewardPerToken() - userRewardPerTokenPaid[account])
+    ) / 1e18 + rewards[account];
+}</pre>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3>6.2 Front-End Implementation</h3>
+                    <p>The front-end is implemented using modern web technologies:</p>
+                    <ol>
+                        <li><strong>Framework</strong>: HTML5, CSS3, JavaScript</li>
+                        <li><strong>Web3 Integration</strong>: ethers.js for blockchain interactions</li>
+                        <li><strong>Responsive Design</strong>: Mobile-first approach for all interfaces</li>
+                        <li><strong>SVG Generation</strong>: Dynamic pool icon creation based on cash tags</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>6.3 Deployment Architecture</h3>
+                    <p>The platform follows a decentralized deployment model:</p>
+                    <ol>
+                        <li><strong>Smart Contracts</strong>: Deployed on PulseChain mainnet</li>
+                        <li><strong>Front-End</strong>: Static website hosted on IPFS for censorship resistance</li>
+                        <li><strong>Backend Services</strong>: None - fully decentralized architecture</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="security">
+                <h2>7. Security Considerations</h2>
+                
+                <div class="subsection">
+                    <h3>7.1 Security Model</h3>
+                    <p>Single Steak's security model addresses several risk vectors:</p>
+                    <ol>
+                        <li>
+                            <strong>Smart Contract Risks</strong>:
+                            <ul>
+                                <li>Reentrancy protections in all withdrawal functions</li>
+                                <li>No external calls in critical functions</li>
+                                <li>Proper integer overflow/underflow protection</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Economic Security</strong>:
+                            <ul>
+                                <li>Timelocks to prevent flash loan attacks on reward rates</li>
+                                <li>Separation of user funds from protocol operations</li>
+                                <li>No privileged roles with access to user funds</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Operational Security</strong>:
+                            <ul>
+                                <li>Factory contract with minimal upgradeability</li>
+                                <li>No admin keys with extraordinary powers</li>
+                                <li>Transparent, predictable behavior</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>7.2 Audit Status</h3>
+                    <p>Pending</p>
+                </div>
+                
+                <div class="subsection">
+                    <h3>7.3 Known Limitations</h3>
+                    <p>The protocol has several acknowledged limitations and constraints:</p>
+                    <ol>
+                        <li><strong>Pool Creator Trust</strong>: Users must trust pool creators to maintain adequate rewards</li>
+                        <li><strong>No Native Compounding</strong>: Rewards must be manually claimed and re-staked</li>
+                        <li><strong>Single Token Limitation</strong>: Each pool supports only one token type</li>
+                        <li><strong>No Internal Price Oracles</strong>: No native price discovery mechanism</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="governance">
+                <h2>8. Governance</h2>
+                
+                <div class="subsection">
+                    <h3>8.1 Current Governance Structure</h3>
+                    <p>In its initial implementation, Single Steak operates with minimal governance:</p>
+                    <ol>
+                        <li><strong>Factory Contract Management</strong>: Basic parameters (creation fee, fee recipient) controlled by factory owner</li>
+                        <li><strong>Pool Independence</strong>: Individual pools are controlled solely by their creators</li>
+                        <li><strong>No Protocol-Wide Governance</strong>: No voting or proposal mechanisms for general protocol changes</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3>8.2 Future Governance Considerations</h3>
+                    <p>The roadmap includes potential governance enhancements:</p>
+                    <ol>
+                        <li><strong>DAO Structure</strong>: Potential transition to community governance</li>
+                        <li><strong>Parameter Optimization</strong>: Community-driven refinement of protocol parameters</li>
+                        <li><strong>Fee Distribution</strong>: Mechanisms for broader distribution of platform fees</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="roadmap">
+                <h2>9. Roadmap</h2>
+                
+                <div class="subsection">
+                    <h3>9.1 Phase 1: Initial Deployment (Current)</h3>
+                    <ul>
+                        <li>PulseChain mainnet deployment</li>
+                        <li>Basic staking pool functionality</li>
+                        <li>Pool creation and management tools</li>
+                        <li>User staking interface</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <h3>9.2 Phase 2: Enhancement (Q3 2025)</h3>
+                    <ul>
+                        <li>Advanced analytics dashboard</li>
+                        <li>Expanded pool customization options</li>
+                        <li>Mobile optimization</li>
+                        <li>Social features and sharing tools</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <h3>9.3 Phase 3: Expansion (Q1 2026)</h3>
+                    <ul>
+                        <li>Multi-pool staking strategies</li>
+                        <li>Enhanced reward structures</li>
+                        <li>Potential governance implementation</li>
+                        <li>Cross-chain bridging considerations</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="conclusion">
+                <h2>10. Conclusion</h2>
+                <p>Single Steak represents a significant advancement in staking protocols, addressing the critical limitations of traditional liquidity mining and two-sided staking mechanisms. By eliminating impermanent loss, simplifying the user experience, and providing flexible tools for token projects, the protocol creates a more accessible, efficient staking ecosystem on PulseChain.</p>
+                <p>The combination of transparent reward mechanics, customizable parameters, and security-focused design positions Single Steak as a fundamental infrastructure component for PulseChain's growing DeFi ecosystem. As the platform evolves, it will continue to prioritize simplicity, security, and user-centric design while expanding its capabilities to meet the needs of the broader blockchain community.</p>
+            </section>
+
+            <section id="references">
+                <h2>11. References</h2>
+                <ol class="references-list">
+                    <li>PulseChain Documentation: <a href="https://pulsechain.com/">https://pulsechain.com/</a></li>
+                    <li>"Impermanent Loss in DeFi: Analysis and Mitigation Strategies," Journal of Blockchain Research, 2023.</li>
+                    <li>EIP-20: ERC-20 Token Standard: <a href="https://eips.ethereum.org/EIPS/eip-20">https://eips.ethereum.org/EIPS/eip-20</a></li>
+                    <li>"Single-Sided vs. Two-Sided Staking: A Comparative Analysis," DeFi Research Foundation, 2024.</li>
+                    <li>"Timelock Mechanisms in DeFi Governance," Blockchain Security Journal, 2024.</li>
+                </ol>
+                <p class="disclaimer">This white paper represents the current design of the Single Steak protocol as of May, 2025. The project team reserves the right to make changes to the implementation details while maintaining the core principles outlined herein.</p>
+            </section>
+        </article>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/steak.webp" alt="PulseChain Staking">
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#explore">Explore Pools</a></li>
+                    <li><a href="index.html#create">Create Pool</a></li>
+                    <li><a href="index.html#dashboard">My Dashboard</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Documentation</h4>
+                <ul>
+                    <li><a href="">Verfied Contract</a></li>
+                    <li><a href="whitepaper.html">White Paper</a></li>
+                    <li><a href="guide.html">Guide</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://t.me/gainrangerheffe" target="_blank" class="social-icon">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://x.com/singlesteak" target="_blank" class="social-icon">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 PulseChain Staking Platform. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Add this CSS to match your site styles -->
+<style>
+    .whitepaper-content {
+        padding: 160px 0 80px;
+    }
+    
+    .whitepaper {
+        background-color: var(--background-card);
+        border-radius: var(--border-radius-lg);
+        padding: 3rem;
+        box-shadow: var(--shadow-md);
+        color: var(--text-light);
+    }
+    
+    .whitepaper-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .whitepaper-header h1 {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .whitepaper-header h2 {
+        font-size: 1.8rem;
+        color: var(--text-dim);
+        margin-bottom: 1rem;
+    }
+    
+    .whitepaper-header h2::after {
+        display: none;
+    }
+    
+    .whitepaper-version {
+        font-style: italic;
+        color: var(--text-dim);
+        margin-bottom: 1.5rem;
+    }
+    
+    section {
+        margin-bottom: 3rem;
+    }
+    
+    section h2 {
+        color: var(--primary-light);
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        text-align: left;
+    }
+    
+    section h2::after {
+        left: 0;
+        transform: none;
+        background: var(--primary-light);
+    }
+    
+    .subsection {
+        margin-bottom: 2rem;
+    }
+    
+    .subsection h3 {
+        color: var(--secondary-color);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .subsection h4 {
+        color: var(--text-light);
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    ol, ul {
+        margin-left: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .toc {
+        list-style-type: decimal;
+    }
+    
+    .toc a {
+        color: var(--text-light);
+        text-decoration: none;
+        transition: color var(--transition-fast);
+    }
+    
+    .toc a:hover {
+        color: var(--primary-light);
+    }
+    
+    .diagram-container {
+        margin: 2rem 0;
+        text-align: center;
+    }
+    
+    .protocol-diagram, .contract-diagram {
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--border-radius-md);
+    }
+    
+    .code-flow {
+        background-color: var(--background-darker);
+        padding: 0.5rem 1rem;
+        border-radius: var(--border-radius-sm);
+        font-family: monospace;
+        margin: 0.5rem 0;
+        display: inline-block;
+    }
+    
+    .code-block {
+        margin: 1.5rem 0;
+    }
+    
+    .code-block h4 {
+        margin-bottom: 0.5rem;
+    }
+    
+    .code {
+        background-color: var(--background-darker);
+        padding: 1rem;
+        border-radius: var(--border-radius-md);
+        font-family: monospace;
+        font-size: 0.9rem;
+        overflow-x: auto;
+        white-space: pre;
+        line-height: 1.5;
+    }
+    
+    .formula {
+        background-color: var(--background-darker);
+        padding: 1rem;
+        border-radius: var(--border-radius-md);
+        font-family: monospace;
+        font-size: 1.1rem;
+        margin: 1rem 0;
+        display: block;
+        text-align: center;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+        margin: 1.5rem 0;
+    }
+    
+    .competitive-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .competitive-table th, .competitive-table td {
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--border-color);
+        text-align: left;
+    }
+    
+    .competitive-table th {
+        background-color: var(--background-darker);
+        color: var(--primary-light);
+    }
+    
+    .competitive-table tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.03);
+    }
+    
+    .swot-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .swot-item {
+        background-color: var(--background-darker);
+        padding: 1.5rem;
+        border-radius: var(--border-radius-md);
+    }
+    
+    .swot-item h4 {
+        color: var(--primary-light);
+        margin-bottom: 1rem;
+    }
+    
+    .swot-item ul {
+        margin-left: 1.5rem;
+        margin-bottom: 0;
+    }
+    
+    .references-list {
+        list-style-type: decimal;
+    }
+    
+    .references-list li {
+        margin-bottom: 0.75rem;
+    }
+    
+    .disclaimer {
+        font-style: italic;
+        color: var(--text-dim);
+        margin-top: 2rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Mobile Responsiveness */
+    @media (max-width: 992px) {
+        .whitepaper {
+            padding: 2rem;
+        }
+        
+        .swot-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .whitepaper-content {
+            padding: 120px 0 60px;
+        }
+        
+        .whitepaper {
+            padding: 1.5rem;
+        }
+        
+        .whitepaper-header h1 {
+            font-size: 2.2rem;
+        }
+        
+        .whitepaper-header h2 {
+            font-size: 1.4rem;
+        }
+        
+        section h2 {
+            font-size: 1.8rem;
+        }
+        
+        .subsection h3 {
+            font-size: 1.3rem;
+        }
+    }
+</style>
+
+<!-- Scripts (same as index.html) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.9.0/ethers.umd.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
