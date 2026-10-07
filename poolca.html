@@ -3,182 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Single Steak: Contract Verification Guide</title>
-    <!-- Meta tags for social sharing -->
-    <meta property="og:title" content="Single Steak: PulseChain Staking Platform">
-    <meta property="og:description" content="Create and manage single-sided staking pools for PulseChain projects">
-    <meta property="og:image" content="https://singlesteak.com/images/meta.webp">
+
+    <title>Verify Your Staking Pool Contract on PulseScan | Single Steak</title>
+    <meta name="description" content="Step-by-step guide to verifying a Single Steak staking pool contract on PulseScan, with the compiler settings and the full contract source to paste.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://singlesteak.com/poolca.html">
+    <meta name="theme-color" content="#080914">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Single Steak">
+    <meta property="og:title" content="Verify Your Staking Pool Contract on PulseScan | Single Steak">
+    <meta property="og:description" content="Step-by-step guide to verifying a Single Steak staking pool contract on PulseScan, with the compiler settings and the full contract source to paste.">
     <meta property="og:url" content="https://singlesteak.com/poolca.html">
-    <meta property="og:type" content="website">
-    
-    <!-- Twitter/X card -->
+    <meta property="og:image" content="https://singlesteak.com/images/meta.webp">
+
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Single Steak: PulseChain Staking Platform">
-    <meta name="twitter:description" content="Create and manage single-sided staking pools for PulseChain projects">
+    <meta name="twitter:site" content="@singlesteak">
+    <meta name="twitter:title" content="Verify Your Staking Pool Contract on PulseScan | Single Steak">
+    <meta name="twitter:description" content="Step-by-step guide to verifying a Single Steak staking pool contract on PulseScan, with the compiler settings and the full contract source to paste.">
     <meta name="twitter:image" content="https://singlesteak.com/images/meta.webp">
-    <meta name="twitter:site" content="https://singlesteak.com/poolca.html">
-    <!-- Favicon -->
+
     <link rel="icon" href="images/steak.ico">
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- Fonts and icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <style>
-        .verification-guide {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            color: #ffffff;
-        }
-        
-        .guide-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .guide-section {
-            background: #2d2d2d;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border: 1px solid #444;
-        }
-        
-        .step-number {
-            background: #ff6b35;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-right: 1rem;
-        }
-        
-        .step-title {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .code-block {
-            background: #1a1a1a;
-            border: 1px solid #444;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
-            overflow-x: auto;
-            position: relative;
-        }
-        
-        .code-block pre {
-            margin: 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.4;
-            color: #e0e0e0;
-        }
-        
-        .copy-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ff6b35;
-            color: white;
-            border: none;
-            padding: 0.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-        
-        .copy-btn:hover {
-            background: #e55a2b;
-        }
-        
-        .warning-box {
-            background: #2d1b0d;
-            border: 1px solid #ff9800;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-        
-        .warning-box i {
-            color: #ff9800;
-            margin-right: 0.5rem;
-        }
-        
-        .info-box {
-            background: #0d1f2d;
-            border: 1px solid #007bff;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-        
-        .info-box i {
-            color: #007bff;
-            margin-right: 0.5rem;
-        }
-        
-        .parameter-list {
-            background: #1a1a1a;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-        
-        .parameter-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #444;
-        }
-        
-        .parameter-item:last-child {
-            border-bottom: none;
-        }
-        
-        .parameter-name {
-            font-family: 'Courier New', monospace;
-            color: #ff6b35;
-        }
-        
-        .parameter-desc {
-            color: #ccc;
-            text-align: right;
-            flex: 1;
-            margin-left: 1rem;
-        }
-        
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            color: #ff6b35;
-            text-decoration: none;
-            margin-bottom: 2rem;
-        }
-        
-        .back-link:hover {
-            color: #e55a2b;
-        }
-        
-        .back-link i {
-            margin-right: 0.5rem;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "TechArticle",
+                "@id": "https://singlesteak.com/poolca.html#article",
+                "headline": "Verify your Single Steak pool contract on PulseScan",
+                "description": "Step-by-step guide to verifying a Single Steak staking pool contract on PulseScan, with the compiler settings and the full contract source to paste.",
+                "url": "https://singlesteak.com/poolca.html",
+                "inLanguage": "en",
+                "image": "https://singlesteak.com/images/meta.webp",
+                "author": {
+                    "@type": "Organization",
+                    "name": "Single Steak",
+                    "url": "https://singlesteak.com/"
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Single Steak",
+                    "url": "https://singlesteak.com/"
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Single Steak",
+                        "item": "https://singlesteak.com/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Contract verification",
+                        "item": "https://singlesteak.com/poolca.html"
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo" aria-label="Single Steak, home">
+                    <img src="images/steak.webp" alt="" id="site-logo" width="44" height="44">
+                    <span class="logo-text">Single Steak</span>
+                </a>
+                <nav class="main-nav" aria-label="Main">
+                    <ul class="nav-links">
+                        <li><a href="index.html#explore" class="nav-link">Explore Pools</a></li>
+                        <li><a href="index.html#create" class="nav-link create-btn">Create Pool</a></li>
+                        <li><a href="guide.html" class="nav-link">User Guide</a></li>
+                        <li><a href="whitepaper.html" class="nav-link">Whitepaper</a></li>
+                        <li><a href="poolca.html" class="nav-link">Verify a Pool</a></li>
+                    </ul>
+                </nav>
+                <div class="wallet-connect">
+                    <a href="index.html" class="btn connect-btn">Open the app</a>
+                </div>
+                <button class="mobile-menu-toggle" type="button" aria-label="Menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
     <div class="verification-guide">
         <a href="index.html" class="back-link">
-            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
             Back to Single Steak
         </a>
         
         <div class="guide-header">
-            <h1><img src="images/steak.webp" alt="PulseChain Staking" id="site-logo" width="40" height="40" loading="eager"></i> Contract Verification Guide</h1>
+            <h1>Contract verification guide</h1>
             <p>Learn how to verify your staking pool contract on PulseScan</p>
         </div>
 
@@ -207,7 +148,7 @@
             </ul>
             
             <div class="info-box">
-                <i class="fas fa-info-circle"></i>
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
                 <strong>Note:</strong> Each staking pool has its own unique contract address, separate from the factory contract.
             </div>
         </div>
@@ -218,7 +159,7 @@
                 <h3>Go to PulseScan</h3>
             </div>
             
-            <p>Navigate to <a href="https://scan.pulsechain.com" target="_blank" style="color: #ff6b35;">https://scan.pulsechain.com</a> and:</p>
+            <p>Navigate to <a href="https://scan.pulsechain.com" target="_blank" rel="noopener">scan.pulsechain.com</a> and:</p>
             <ol>
                 <li>Search for your pool contract address</li>
                 <li>Click on the contract address in the results</li>
@@ -251,7 +192,7 @@
             
             <div class="code-block">
                 <button class="copy-btn" onclick="copyContractCode()">
-                    <i class="fas fa-copy"></i> Copy
+                    <i class="fas fa-copy" aria-hidden="true"></i> Copy
                 </button>
                 <pre id="contract-code">// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
@@ -549,7 +490,7 @@ contract StakingPool is Ownable, ReentrancyGuard {
             </div>
             
             <div class="warning-box">
-                <i class="fas fa-exclamation-triangle"></i>
+                <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
                 <strong>Important:</strong> All parameters must be exactly as they were when the pool was created. If you're unsure about any values, you can view them by reading the contract on PulseScan before verification.
             </div>
         </div>
@@ -569,7 +510,7 @@ contract StakingPool is Ownable, ReentrancyGuard {
             </ol>
             
             <div class="info-box">
-                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-check-circle" aria-hidden="true"></i>
                 <strong>Success!</strong> Once verified, users will be able to read your contract's source code directly on PulseScan, increasing trust and transparency.
             </div>
         </div>
@@ -588,7 +529,55 @@ contract StakingPool is Ownable, ReentrancyGuard {
             <p>If you continue having issues, you can contact support or ask for help in the community.</p>
         </div>
     </div>
+    </main>
 
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/steak.webp" alt="" width="56" height="56" loading="lazy">
+                    <p>Single-sided staking pools for PulseChain projects.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick links</h4>
+                    <ul>
+                        <li><a href="index.html#explore">Explore Pools</a></li>
+                        <li><a href="index.html#create">Create Pool</a></li>
+                        <li><a href="index.html#dashboard">My Dashboard</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="https://scan.mypinata.cloud/ipfs/bafybeih3olry3is4e4lzm7rus5l3h6zrphcal5a7ayfkhzm5oivjro2cp4/#/address/0x474225793869203F436aCEF9CF251Dc137cE02cB?tab=contract" target="_blank" rel="noopener">Verified factory contract</a></li>
+                        <li><a href="whitepaper.html">Whitepaper</a></li>
+                        <li><a href="guide.html">User guide</a></li>
+                        <li><a href="poolca.html">Verify your pool contract</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-social">
+                    <h4>Community</h4>
+                    <div class="social-icons">
+                        <a href="https://t.me/singlesteak" target="_blank" class="social-icon" rel="noopener" aria-label="Single Steak on Telegram">
+                            <i class="fab fa-telegram" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://x.com/singlesteak" target="_blank" class="social-icon" rel="noopener" aria-label="Single Steak on X">
+                            <i class="fab fa-x-twitter" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Single Steak. All rights reserved. Made by <a href="https://github.com/GainRangerHeffe" target="_blank" rel="noopener">@GainRangerHeffe</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="nav.js" defer></script>
     <script>
         function copyContractCode() {
             const codeElement = document.getElementById('contract-code');
@@ -598,11 +587,11 @@ contract StakingPool is Ownable, ReentrancyGuard {
                 const button = document.querySelector('.copy-btn');
                 const originalText = button.innerHTML;
                 button.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                button.style.background = '#28a745';
+                button.style.background = 'var(--success-color)';
                 
                 setTimeout(() => {
                     button.innerHTML = originalText;
-                    button.style.background = '#ff6b35';
+                    button.style.background = '';
                 }, 2000);
             }).catch(err => {
                 console.error('Failed to copy: ', err);

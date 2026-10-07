@@ -14,7 +14,7 @@ const TAX_RECIPIENT_ADDRESS = '0xYOUR_WALLET_ADDRESS'; // Replace with your wall
 // Pinata configuration
 const PINATA_API_KEY = 'YOUR_PINATA_API_KEY'; // Replace with your Pinata API key
 const PINATA_SECRET_KEY = 'YOUR_PINATA_SECRET_KEY'; // Replace with your Pinata secret key
-const PINATA_GATEWAY = 'https://gateway.pinata.cloud/ipfs/';
+const PINATA_GATEWAY = 'https://black-electoral-dormouse-46.mypinata.cloud/ipfs/';
 
 // Constants for calculations
 const SECONDS_PER_YEAR = 31536000; // 365 days

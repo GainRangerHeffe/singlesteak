@@ -3,65 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Single Steak: User Guide</title>
-    <!-- Meta tags for social sharing -->
-    <meta property="og:title" content="Single Steak: PulseChain Staking Platform">
-    <meta property="og:description" content="Create and manage single-sided staking pools for PulseChain projects">
-    <meta property="og:image" content="https://singlesteak.com/images/meta.webp">
+
+    <title>Single Steak User Guide | Staking and Creating Pools on PulseChain</title>
+    <meta name="description" content="How to stake tokens, claim rewards and create your own single-sided staking pool on Single Steak, with the reward maths, FAQ and troubleshooting.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://singlesteak.com/guide.html">
+    <meta name="theme-color" content="#080914">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Single Steak">
+    <meta property="og:title" content="Single Steak User Guide | Staking and Creating Pools on PulseChain">
+    <meta property="og:description" content="How to stake tokens, claim rewards and create your own single-sided staking pool on Single Steak, with the reward maths, FAQ and troubleshooting.">
     <meta property="og:url" content="https://singlesteak.com/guide.html">
-    <meta property="og:type" content="website">
-    
-    <!-- Twitter/X card -->
+    <meta property="og:image" content="https://singlesteak.com/images/meta.webp">
+
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Single Steak: PulseChain Staking Platform">
-    <meta name="twitter:description" content="A guide to create and manage single-sided staking pools for PulseChain projects on Single Steak">
+    <meta name="twitter:site" content="@singlesteak">
+    <meta name="twitter:title" content="Single Steak User Guide | Staking and Creating Pools on PulseChain">
+    <meta name="twitter:description" content="How to stake tokens, claim rewards and create your own single-sided staking pool on Single Steak, with the reward maths, FAQ and troubleshooting.">
     <meta name="twitter:image" content="https://singlesteak.com/images/meta.webp">
-    <meta name="twitter:site" content="https://singlesteak.com/guide.html">
-    <!-- Favicon -->
+
     <link rel="icon" href="images/steak.ico">
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- Fonts and icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "TechArticle",
+                "@id": "https://singlesteak.com/guide.html#article",
+                "headline": "Single Steak user guide",
+                "description": "How to stake tokens, claim rewards and create your own single-sided staking pool on Single Steak, with the reward maths, FAQ and troubleshooting.",
+                "url": "https://singlesteak.com/guide.html",
+                "inLanguage": "en",
+                "image": "https://singlesteak.com/images/meta.webp",
+                "author": {
+                    "@type": "Organization",
+                    "name": "Single Steak",
+                    "url": "https://singlesteak.com/"
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Single Steak",
+                    "url": "https://singlesteak.com/"
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Single Steak",
+                        "item": "https://singlesteak.com/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "User guide",
+                        "item": "https://singlesteak.com/guide.html"
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="header">
-    <div class="container">
-        <div class="header-content">
-            <a href="index.html" class="logo">
-                <img src="images/steak.webp" alt="PulseChain Staking" id="site-logo">
-            </a>
-            
-            <nav class="main-nav">
-                <ul class="nav-links">
-                    <li><a href="index.html#explore" class="nav-link">Explore Pools</a></li>
-                    <li><a href="index.html#create" class="nav-link create-btn">Create Pool</a></li>
-                    <li><a href="index.html#dashboard" class="nav-link">My Dashboard</a></li>
-                </ul>
-            </nav>
-            
-            <div class="social-links">
-                <a href="https://t.me/gainrangerheffe" target="_blank" class="social-link">
-                    <i class="fab fa-telegram"></i>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo" aria-label="Single Steak, home">
+                    <img src="images/steak.webp" alt="" id="site-logo" width="44" height="44">
+                    <span class="logo-text">Single Steak</span>
                 </a>
-                <a href="https://x.com/singlesteak" target="_blank" class="social-link">
-                    <i class="fab fa-x-twitter"></i>
-                </a>
+                <nav class="main-nav" aria-label="Main">
+                    <ul class="nav-links">
+                        <li><a href="index.html#explore" class="nav-link">Explore Pools</a></li>
+                        <li><a href="index.html#create" class="nav-link create-btn">Create Pool</a></li>
+                        <li><a href="guide.html" class="nav-link">User Guide</a></li>
+                        <li><a href="whitepaper.html" class="nav-link">Whitepaper</a></li>
+                        <li><a href="poolca.html" class="nav-link">Verify a Pool</a></li>
+                    </ul>
+                </nav>
+                <div class="wallet-connect">
+                    <a href="index.html" class="btn connect-btn">Open the app</a>
+                </div>
+                <button class="mobile-menu-toggle" type="button" aria-label="Menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
-            
-            <button class="mobile-menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
-    </div>
-</header>
+    </header>
 
-<main class="whitepaper-content">
+    <main class="whitepaper-content" id="main">
     <div class="container">
         <article class="whitepaper">
             <header class="whitepaper-header">
-                <h1>SINGLE STEAK</h1>
+                <h1>Single Steak</h1>
                 <h2>PulseChain Single-Sided Staking Platform</h2>
                 <p class="whitepaper-version">User Guide v1.0</p>
                 <hr>
@@ -391,7 +445,7 @@
                     
                     <div class="swot-item">
                         <h4>Is the contract code audited?</h4>
-                        <p>[Include audit information if available]</p>
+                        <p>The factory contract and the pool contract are verified and their source code is public. The pool source is on the <a href="poolca.html">contract verification page</a>.</p>
                     </div>
                     
                     <div class="swot-item">
@@ -448,220 +502,52 @@
     </div>
 </main>
 
-<footer class="footer">
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img src="images/steak.webp" alt="PulseChain Staking">
-            </div>
-            
-            <div class="footer-links">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="index.html#explore">Explore Pools</a></li>
-                    <li><a href="index.html#create">Create Pool</a></li>
-                    <li><a href="index.html#dashboard">My Dashboard</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-links">
-                <h4>Documentation</h4>
-                <ul>
-                    <li><a href="">Verfied Contract</a></li>
-                    <li><a href="whitepaper.html">White Paper</a></li>
-                    <li><a href="guide.html">Guide</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-social">
-                <h4>Connect With Us</h4>
-                <div class="social-icons">
-                    <a href="https://t.me/gainrangerheffe" target="_blank" class="social-icon">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a href="https://x.com/singlesteak" target="_blank" class="social-icon">
-                        <i class="fab fa-x-twitter"></i>
-                    </a>
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/steak.webp" alt="" width="56" height="56" loading="lazy">
+                    <p>Single-sided staking pools for PulseChain projects.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick links</h4>
+                    <ul>
+                        <li><a href="index.html#explore">Explore Pools</a></li>
+                        <li><a href="index.html#create">Create Pool</a></li>
+                        <li><a href="index.html#dashboard">My Dashboard</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="https://scan.mypinata.cloud/ipfs/bafybeih3olry3is4e4lzm7rus5l3h6zrphcal5a7ayfkhzm5oivjro2cp4/#/address/0x474225793869203F436aCEF9CF251Dc137cE02cB?tab=contract" target="_blank" rel="noopener">Verified factory contract</a></li>
+                        <li><a href="whitepaper.html">Whitepaper</a></li>
+                        <li><a href="guide.html">User guide</a></li>
+                        <li><a href="poolca.html">Verify your pool contract</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-social">
+                    <h4>Community</h4>
+                    <div class="social-icons">
+                        <a href="https://t.me/singlesteak" target="_blank" class="social-icon" rel="noopener" aria-label="Single Steak on Telegram">
+                            <i class="fab fa-telegram" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://x.com/singlesteak" target="_blank" class="social-icon" rel="noopener" aria-label="Single Steak on X">
+                            <i class="fab fa-x-twitter" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Single Steak. All rights reserved. Made by <a href="https://github.com/GainRangerHeffe" target="_blank" rel="noopener">@GainRangerHeffe</a></p>
+            </div>
         </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2025 PulseChain Staking Platform. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
+    </footer>
 
-<!-- Add this CSS to match your site styles -->
-<style>
-    .whitepaper-content {
-        padding: 160px 0 80px;
-    }
-    
-    .whitepaper {
-        background-color: var(--background-card);
-        border-radius: var(--border-radius-lg);
-        padding: 3rem;
-        box-shadow: var(--shadow-md);
-        color: var(--text-light);
-    }
-    
-    .whitepaper-header {
-        text-align: center;
-        margin-bottom: 3rem;
-    }
-    
-    .whitepaper-header h1 {
-        font-size: 3rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .whitepaper-header h2 {
-        font-size: 1.8rem;
-        color: var(--text-dim);
-        margin-bottom: 1rem;
-    }
-    
-    .whitepaper-header h2::after {
-        display: none;
-    }
-    
-    .whitepaper-version {
-        font-style: italic;
-        color: var(--text-dim);
-        margin-bottom: 1.5rem;
-    }
-    
-    section {
-        margin-bottom: 3rem;
-    }
-    
-    section h2 {
-        color: var(--primary-light);
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
-        text-align: left;
-    }
-    
-    section h2::after {
-        left: 0;
-        transform: none;
-        background: var(--primary-light);
-    }
-    
-    .subsection {
-        margin-bottom: 2rem;
-    }
-    
-    .subsection h3 {
-        color: var(--secondary-color);
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-    }
-    
-    .subsection h4 {
-        color: var(--text-light);
-        font-size: 1.25rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    ol, ul {
-        margin-left: 2rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    li {
-        margin-bottom: 0.5rem;
-    }
-    
-    .toc {
-        list-style-type: decimal;
-    }
-    
-    .toc a {
-        color: var(--text-light);
-        text-decoration: none;
-        transition: color var(--transition-fast);
-    }
-    
-    .toc a:hover {
-        color: var(--primary-light);
-    }
-    
-    .code-flow {
-        background-color: var(--background-darker);
-        padding: 0.5rem 1rem;
-        border-radius: var(--border-radius-sm);
-        font-family: monospace;
-        margin: 0.5rem 0;
-        display: inline-block;
-    }
-    
-    .formula {
-        background-color: var(--background-darker);
-        padding: 1rem;
-        border-radius: var(--border-radius-md);
-        font-family: monospace;
-        font-size: 1.1rem;
-        margin: 1rem 0;
-        display: block;
-        text-align: center;
-    }
-    
-    .swot-item {
-        background-color: var(--background-darker);
-        padding: 1.5rem;
-        border-radius: var(--border-radius-md);
-        margin-bottom: 1rem;
-    }
-    
-    .swot-item h4 {
-        color: var(--primary-light);
-        margin-bottom: 0.5rem;
-    }
-    
-    .swot-item ul {
-        margin-left: 1.5rem;
-        margin-bottom: 0;
-    }
-    
-    /* Mobile Responsiveness */
-    @media (max-width: 992px) {
-        .whitepaper {
-            padding: 2rem;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .whitepaper-content {
-            padding: 120px 0 60px;
-        }
-        
-        .whitepaper {
-            padding: 1.5rem;
-        }
-        
-        .whitepaper-header h1 {
-            font-size: 2.2rem;
-        }
-        
-        .whitepaper-header h2 {
-            font-size: 1.4rem;
-        }
-        
-        section h2 {
-            font-size: 1.8rem;
-        }
-        
-        .subsection h3 {
-            font-size: 1.3rem;
-        }
-    }
-</style>
-
-<!-- Scripts (same as index.html) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.9.0/ethers.umd.min.js"></script>
-<script src="app.js"></script>
-
+    <script src="nav.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,21 @@
+# Single Steak
+
+> Single-sided staking pools for PulseChain. Any project can create a pool for its token; holders stake that one token and earn rewards. No liquidity pair is required.
+
+## Facts
+
+- Network: PulseChain (chain ID 369, 0x171)
+- Factory contract: 0x474225793869203F436aCEF9CF251Dc137cE02cB
+- No lock-up: stakers can unstake at any time
+- Rewards are claimed manually and are not auto-compounded
+- Reward rate changes by a pool owner are subject to a 24-hour timelock
+- Creating a pool costs a one-time fee paid in PLS
+- Supported wallets: MetaMask, OKX Wallet, Rabby, Internet Money
+- Community: https://x.com/singlesteak and https://t.me/singlesteak
+
+## Pages
+
+- [App](https://singlesteak.com/): explore pools, stake, create a pool, owner dashboard, FAQ
+- [User guide](https://singlesteak.com/guide.html): staking, creating pools, reward maths, troubleshooting
+- [Whitepaper](https://singlesteak.com/whitepaper.html): protocol design, architecture, security, roadmap
+- [Contract verification](https://singlesteak.com/poolca.html): verifying a pool contract on PulseScan, with the pool source code

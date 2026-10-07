@@ -7,81 +7,182 @@
     <meta name="compatible-chains" content="evm-only">
     <meta name="pulsechain:chainId" content="0x171">
     
-    <title>Single Steak: PulseChain Single Staking Platform</title>
-    
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://pulsechain-rpc.publicnode.com">
-    
-    <!-- Meta tags for social sharing -->
-    <meta property="og:title" content="Single Steak: PulseChain Staking Platform">
-    <meta property="og:description" content="Create and manage single-sided staking pools for PulseChain projects">
-    <meta property="og:image" content="https://singlesteak.com/images/meta.webp">
-    <meta property="og:url" content="https://singlesteak.com">
+    <title>Single Steak | Single-Sided Staking Pools on PulseChain</title>
+    <meta name="description" content="Create a single-sided staking pool for any PulseChain token, or stake in pools from other projects. No liquidity pair, no lock-up, rewards you claim any time.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://singlesteak.com/">
+    <meta name="theme-color" content="#080914">
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    
-    <!-- Twitter/X card -->
+    <meta property="og:site_name" content="Single Steak">
+    <meta property="og:title" content="Single Steak | Single-Sided Staking Pools on PulseChain">
+    <meta property="og:description" content="Create a single-sided staking pool for any PulseChain token, or stake in pools from other projects. No liquidity pair, no lock-up, rewards you claim any time.">
+    <meta property="og:url" content="https://singlesteak.com/">
+    <meta property="og:image" content="https://singlesteak.com/images/meta.webp">
+    <meta property="og:image:alt" content="The Single Steak mascot, a cartoon steak on a trophy base labelled Stake Here">
+
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Single Steak: PulseChain Staking Platform">
-    <meta name="twitter:description" content="Create and manage single-sided staking pools for PulseChain projects">
+    <meta name="twitter:site" content="@singlesteak">
+    <meta name="twitter:title" content="Single Steak | Single-Sided Staking Pools on PulseChain">
+    <meta name="twitter:description" content="Create a single-sided staking pool for any PulseChain token, or stake in pools from other projects. No liquidity pair, no lock-up, rewards you claim any time.">
     <meta name="twitter:image" content="https://singlesteak.com/images/meta.webp">
-    <meta name="twitter:site" content="https://singlesteak.com">
-    
-    <!-- Favicon -->
+
     <link rel="icon" href="images/steak.ico">
-    
-    <!-- Critical CSS inline -->
-    <style>
-        /* Critical above-the-fold styles */
-        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-        .header { background: #1a1a1a; color: white; padding: 1rem 0; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-        .hero { background: #0a0a0a; color: white; padding: 4rem 0; }
-        .loading-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 9999; }
-    </style>
-    
-    <!-- Main CSS - load async -->
-    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="styles.css"></noscript>
-    
-    <!-- Font Awesome with font-display swap -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+
+    <!-- Fonts and icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebApplication",
+                "@id": "https://singlesteak.com/#app",
+                "name": "Single Steak",
+                "url": "https://singlesteak.com/",
+                "description": "Create and manage single-sided staking pools for PulseChain tokens, or stake in pools from other projects.",
+                "applicationCategory": "FinanceApplication",
+                "operatingSystem": "Any (web browser with a PulseChain wallet)",
+                "image": "https://singlesteak.com/images/meta.webp",
+                "featureList": [
+                    "Create a single-sided staking pool for any PulseChain ERC20 token",
+                    "Stake, unstake and claim rewards with no lock-up",
+                    "24-hour timelock on reward rate changes",
+                    "Dashboard for pool owners"
+                ],
+                "sameAs": [
+                    "https://x.com/singlesteak",
+                    "https://t.me/singlesteak"
+                ]
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://singlesteak.com/#website",
+                "url": "https://singlesteak.com/",
+                "name": "Single Steak",
+                "inLanguage": "en"
+            },
+            {
+                "@type": "FAQPage",
+                "@id": "https://singlesteak.com/#faq",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "What is Single Steak?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Single Steak is a staking platform on PulseChain. Any project can create a single-sided staking pool for its token, and holders stake that one token to earn rewards. No liquidity pair is needed, so there is no impermanent loss."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Is there a lock-up period?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "No. You can unstake your tokens at any time."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Are rewards compounded automatically?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "No. You claim rewards yourself, and you can stake them again if you want to."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What happens if a pool runs out of rewards?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Staking continues, but no new rewards are earned until the pool owner adds more reward tokens."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Which tokens can have a pool?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Any PulseChain-compatible ERC20 token."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What does it cost?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Creating a pool has a one-time fee paid in PLS, shown in the form before you confirm. Pools created by projects have no platform fee for staking or unstaking. The official STEAK pool has a 1% deposit tax and a 1% withdrawal tax."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can a pool owner change the reward rate?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes, but every change waits out a 24-hour timelock before it takes effect, so stakers can see it coming."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Which wallets and network does it support?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "MetaMask, OKX Wallet, Rabby and Internet Money, on PulseChain only (chain ID 369)."
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <a href="index.html" class="logo">
-                    <img src="images/steak.webp" alt="PulseChain Staking" id="site-logo" width="40" height="40" loading="eager">
+                <a href="index.html" class="logo" aria-label="Single Steak, home">
+                    <img src="images/steak.webp" alt="" id="site-logo" width="44" height="44">
+                    <span class="logo-text">Single Steak</span>
                 </a>
-                Beta Version
-                <nav class="main-nav">
+                <span class="beta-tag">Beta</span>
+                <nav class="main-nav" aria-label="Main">
                     <ul class="nav-links">
                         <li><a href="#explore" class="nav-link">Explore Pools</a></li>
                         <li><a href="#create" class="nav-link create-btn">Create Pool</a></li>
                         <li><a href="#dashboard" class="nav-link">My Dashboard</a></li>
-                        <li><a href="#footer" class="nav-link">Guide & Whitepaper</a></li>
+                        <li><a href="#faq" class="nav-link">FAQ</a></li>
+                        <li><a href="#footer" class="nav-link">Docs</a></li>
                     </ul>
                 </nav>
                 
                 <div class="wallet-connect">
-                    <button id="connect-wallet" class="btn connect-btn">
-                        <i class="fas fa-wallet"></i> Connect Wallet
+                    <button id="connect-wallet" class="btn connect-btn" type="button">
+                        <i class="fas fa-wallet" aria-hidden="true"></i> Connect Wallet
                     </button>
                 </div>
                 
                 <div class="social-links">
-                    <a href="https://t.me/singlesteak" target="_blank" class="social-link" rel="noopener">
-                        <i class="fab fa-telegram"></i>
+                    <a href="https://t.me/singlesteak" target="_blank" class="social-link" rel="noopener" aria-label="Single Steak on Telegram">
+                        <i class="fab fa-telegram" aria-hidden="true"></i>
                     </a>
-                    <a href="https://x.com/singlesteak" target="_blank" class="social-link" rel="noopener">
-                        <i class="fab fa-x-twitter"></i>
+                    <a href="https://x.com/singlesteak" target="_blank" class="social-link" rel="noopener" aria-label="Single Steak on X">
+                        <i class="fab fa-x-twitter" aria-hidden="true"></i>
                     </a>
                 </div>
                 
-                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <button class="mobile-menu-toggle" type="button" aria-label="Menu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -90,43 +191,49 @@
         </div>
     </header>
     
+    <main id="main">
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">Single Steak: PulseChain DIY Staking Platform</h1>
-                <p class="hero-subtitle">Create and manage single-sided staking pools for your PulseChain project</p>
+                <h1 class="hero-title">DIY single&#8209;sided staking for PulseChain</h1>
+                <p class="hero-subtitle">Create a staking pool for your token in a few minutes, or stake in pools from other PulseChain projects. One token in, rewards out, no liquidity pair needed.</p>
                 <div class="hero-cta">
                     <a href="#create" class="btn primary-btn">Create Pool</a>
                     <a href="#explore" class="btn secondary-btn">Explore Pools</a>
                 </div>
+                <ul class="hero-facts">
+                    <li>No lock-up period</li>
+                    <li>24-hour timelock on rate changes</li>
+                    <li>One-time creation fee in PLS</li>
+                </ul>
             </div>
             <div class="hero-image">
-                <img src="images/steak2.webp" alt="Staking Platform Illustration" width="400" height="400" loading="eager">
+                <img src="images/steak2.webp" alt="The Single Steak mascot, a smiling cartoon steak standing on a base labelled Stake Here" width="400" height="400" fetchpriority="high">
             </div>
         </div>
     </section>
     
     <!-- Stats Section -->
-    <section class="stats" style="background-image: url('images/pool.webp'); background-size: 350px; background-repeat: repeat;">
+    <section class="stats" aria-label="Platform stats">
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-card">
-                    <h3 class="stat-value" id="total-pools">0</h3>
+                    <p class="stat-value" id="total-pools">0</p>
                     <p class="stat-label">Active Pools</p>
                 </div>
                 <div class="stat-card">
-                    <h3 class="stat-value" id="avg-apy">0%</h3>
+                    <p class="stat-value" id="avg-apy">0%</p>
                     <p class="stat-label">Average APY</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="steak-pool-card" id="steak-pool">
+    <section class="steak-pool-card" id="steak-pool" aria-label="Official STEAK pool">
         <div class="container">
             <div class="pool-header">
-                <img src="images/steak2.webp" alt="STEAK Pool Logo" class="pool-logo">
+                <img src="images/steak2.webp" alt="" class="pool-logo" width="72" height="72" loading="lazy">
                 <div class="pool-info">
                     <h2 class="pool-name">STEAK Pool</h2>
                     <p class="pool-symbol">STEAK</p>
@@ -138,7 +245,7 @@
                     <span class="stat-item">
                         <span class="stat-label">APY:</span>
                         <span class="stat-value apy-value">0%</span>
-                        <span class="apy-warning" style="display: none;">Low TVL - APY may vary</span>
+                        <span class="apy-warning" style="display: none;">Low TVL, APY may vary</span>
                     </span>
                     <span class="stat-divider">|</span>
                     <span class="stat-item">
@@ -166,16 +273,16 @@
                     <div class="action-group">
                         <label for="deposit-amount">Deposit</label>
                         <input type="number" id="deposit-amount" class="action-input" placeholder="0" min="0" step="0.0001">
-                        <button class="action-btn deposit-btn">Deposit</button>
+                        <button class="action-btn deposit-btn" type="button">Deposit</button>
                     </div>
                     <div class="action-group">
                         <label for="withdraw-amount">Withdraw</label>
                         <input type="number" id="withdraw-amount" class="action-input" placeholder="0" min="0"
                             step="0.0001">
-                        <button class="action-btn withdraw-btn">Withdraw</button>
+                        <button class="action-btn withdraw-btn" type="button">Withdraw</button>
                     </div>
                     <div class="action-group">
-                        <button class="action-btn claim-btn">Claim</button>
+                        <button class="action-btn claim-btn" type="button">Claim</button>
                     </div>
                 </div>
             </div>
@@ -189,11 +296,13 @@
     
             <div class="filter-options">
                 <div class="search-box">
-                    <input type="text" id="pool-search" placeholder="Search pools...">
-                    <i class="fas fa-search"></i>
+                    <label for="pool-search" class="visually-hidden">Search pools</label>
+                    <input type="search" id="pool-search" placeholder="Search by name or symbol">
+                    <i class="fas fa-search" aria-hidden="true"></i>
                 </div>
     
                 <div class="sort-options">
+                    <label for="sort-by" class="visually-hidden">Sort pools</label>
                     <select id="sort-by">
                         <option value="apy-high">Highest APY</option>
                         <option value="apy-low">Lowest APY</option>
@@ -211,7 +320,7 @@
                 <template id="pool-card-template">
                     <div class="pool-card">
                         <div class="pool-header">
-                            <img src="" class="pool-logo" alt="Token Logo" width="48" height="48" loading="lazy">
+                            <img src="" class="pool-logo" alt="" width="52" height="52" loading="lazy" onerror="this.onerror=null;this.src='images/steak2.webp'">
                             <div class="pool-info">
                                 <h3 class="pool-name"></h3>
                                 <p class="pool-symbol"></p>
@@ -222,7 +331,8 @@
                             <div class="pool-stat">
                                 <p class="stat-label">APY</p>
                                 <p class="stat-value apy-value"></p>
-                                <p class="apy-warning" style="display:none; font-size: 0.7rem; color: #ff9800;">Low TVL - APY may vary</p>
+                                <p class="apy-note"></p>
+                                <p class="apy-warning" style="display:none;">Low TVL, APY may vary</p>
                             </div>
                             <div class="pool-stat">
                                 <p class="stat-label">Stakers</p>
@@ -240,14 +350,14 @@
                         </div>
     
                         <div class="pool-actions">
-                            <button class="btn view-btn">View Details</button>
+                            <button class="btn view-btn" type="button">View details</button>
                         </div>
                     </div>
                 </template>
     
                 <!-- Empty state -->
                 <div id="no-pools" class="no-pools">
-                    <img src="images/steak2.webp" alt="No pools found" width="200" height="200" loading="lazy">
+                    <img src="images/steak2.webp" alt="" width="200" height="200" loading="lazy">
                     <h3>No staking pools found</h3>
                     <p>Be the first to create a staking pool!</p>
                     <a href="#create" class="btn primary-btn">Create Pool</a>
@@ -260,10 +370,10 @@
     </section>
     
     <!-- Create Pool Section -->
-    <section id="create" class="create-pool" style="background-image: url('images/tool.webp'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+    <section id="create" class="create-pool">
         <div class="container">
             <h2 class="section-title">Create a Staking Pool</h2>
-            <p class="section-subtitle">Allow users to stake your token and earn rewards</p>
+            <p class="section-subtitle">Let holders stake your token and earn rewards. You set the rate and fund the rewards; the pool contract does the rest.</p>
             
             <div class="create-form-container">
                 <form id="create-pool-form" class="create-pool-form">
@@ -350,16 +460,16 @@
     </section>
     
     <!-- Pool Details Modal -->
-    <div class="modal" id="pool-details-modal">
+    <div class="modal" id="pool-details-modal" role="dialog" aria-modal="true" aria-label="Pool details">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Pool Details</h3>
-                <button class="close-modal" aria-label="Close modal">&times;</button>
+                <button class="close-modal" type="button" aria-label="Close pool details">&times;</button>
             </div>
             
             <div class="modal-body">
                 <div class="pool-details-header">
-                    <img src="" class="pool-logo-lg" id="detail-pool-logo" alt="Token Logo" width="64" height="64" loading="lazy">
+                    <img src="" class="pool-logo-lg" id="detail-pool-logo" alt="" width="72" height="72" loading="lazy" onerror="this.onerror=null;this.src='images/steak2.webp'">
                     <div class="pool-details-info">
                         <h2 id="detail-pool-name"></h2>
                         <p id="detail-pool-symbol"></p>
@@ -371,7 +481,7 @@
                     <div class="detail-stat">
                         <h4>Current APY</h4>
                         <p id="detail-apy"></p>
-                        <p id="detail-apy-warning" style="font-size: 0.8rem; color: #ff9800; display: none;">Low TVL - APY may decrease as more users stake</p>
+                        <p id="detail-apy-warning" class="apy-warning" style="display: none;">Low TVL, APY may decrease as more users stake</p>
                     </div>
                     <div class="detail-stat">
                         <h4>Total Staked</h4>
@@ -401,8 +511,8 @@
                     <div class="stake-form">
                         <h4>Stake Tokens</h4>
                         <div class="input-with-max">
-                            <input type="number" id="stake-amount" placeholder="0.0" min="0" step="0.000000000000000001">
-                            <button class="max-btn" id="stake-max-btn">MAX</button>
+                            <input type="number" id="stake-amount" aria-label="Amount to stake" placeholder="0.0" min="0" step="0.000000000000000001">
+                            <button class="max-btn" type="button" id="stake-max-btn">MAX</button>
                         </div>
                         <div class="balance-display">
                             <p>Balance: <span id="user-token-balance">0</span></p>
@@ -413,8 +523,8 @@
                     <div class="unstake-form">
                         <h4>Unstake Tokens</h4>
                         <div class="input-with-max">
-                            <input type="number" id="unstake-amount" placeholder="0.0" min="0" step="0.000000000000000001">
-                            <button class="max-btn" id="unstake-max-btn">MAX</button>
+                            <input type="number" id="unstake-amount" aria-label="Amount to unstake" placeholder="0.0" min="0" step="0.000000000000000001">
+                            <button class="max-btn" type="button" id="unstake-max-btn">MAX</button>
                         </div>
                         <div class="balance-display">
                             <p>Staked: <span id="user-staked-balance">0</span></p>
@@ -436,8 +546,8 @@
                         <div class="add-rewards-form">
                             <h5>Add Rewards</h5>
                             <div class="input-with-max">
-                                <input type="number" id="add-rewards-amount" placeholder="0.0" min="0" step="0.000000000000000001">
-                                <button class="max-btn" id="rewards-max-btn">MAX</button>
+                                <input type="number" id="add-rewards-amount" aria-label="Reward tokens to add" placeholder="0.0" min="0" step="0.000000000000000001">
+                                <button class="max-btn" type="button" id="rewards-max-btn">MAX</button>
                             </div>
                             <button class="btn primary-btn" id="add-rewards-btn">Add Rewards</button>
                         </div>
@@ -445,7 +555,7 @@
                         <div class="update-rate-form">
                             <h5>Update Reward Rate</h5>
                             <div class="input-with-max">
-                                <input type="number" id="new-reward-rate" placeholder="0.0" min="0" step="0.000000000000000001">
+                                <input type="number" id="new-reward-rate" aria-label="New reward rate" placeholder="0.0" min="0" step="0.000000000000000001">
                             </div>
                             <div class="helper-text">Changes will apply after 24 hour timelock</div>
                             <button class="btn primary-btn" id="update-rate-btn">Schedule Update</button>
@@ -480,7 +590,7 @@
                 </div>
                 
                 <div id="no-dev-pools" class="no-pools">
-                    <img src="images/steak3.webp" alt="No pools found" width="200" height="200" loading="lazy">
+                    <img src="images/steak3.webp" alt="" width="200" height="200" loading="lazy">
                     <h3>You haven't created any pools yet</h3>
                     <p>Create your first staking pool to appear here</p>
                     <a href="#create" class="btn primary-btn">Create Pool</a>
@@ -489,14 +599,59 @@
         </div>
     </section>
     
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div>
+                <h2 class="section-title">Common questions</h2>
+                <p class="section-subtitle">More detail is in the <a href="guide.html">user guide</a> and the <a href="whitepaper.html">whitepaper</a>.</p>
+            </div>
+            <div class="faq-list">
+                <details>
+                    <summary>What is Single Steak?</summary>
+                    <p>Single Steak is a staking platform on PulseChain. Any project can create a single-sided staking pool for its token, and holders stake that one token to earn rewards. No liquidity pair is needed, so there is no impermanent loss.</p>
+                </details>
+                <details>
+                    <summary>Is there a lock-up period?</summary>
+                    <p>No. You can unstake your tokens at any time.</p>
+                </details>
+                <details>
+                    <summary>Are rewards compounded automatically?</summary>
+                    <p>No. You claim rewards yourself, and you can stake them again if you want to.</p>
+                </details>
+                <details>
+                    <summary>What happens if a pool runs out of rewards?</summary>
+                    <p>Staking continues, but no new rewards are earned until the pool owner adds more reward tokens.</p>
+                </details>
+                <details>
+                    <summary>Which tokens can have a pool?</summary>
+                    <p>Any PulseChain-compatible ERC20 token.</p>
+                </details>
+                <details>
+                    <summary>What does it cost?</summary>
+                    <p>Creating a pool has a one-time fee paid in PLS, shown in the form before you confirm. Pools created by projects have no platform fee for staking or unstaking. The official STEAK pool has a 1% deposit tax and a 1% withdrawal tax.</p>
+                </details>
+                <details>
+                    <summary>Can a pool owner change the reward rate?</summary>
+                    <p>Yes, but every change waits out a 24-hour timelock before it takes effect, so stakers can see it coming.</p>
+                </details>
+                <details>
+                    <summary>Which wallets and network does it support?</summary>
+                    <p>MetaMask, OKX Wallet, Rabby and Internet Money, on PulseChain only (chain ID 369).</p>
+                </details>
+            </div>
+        </div>
+    </section>
+    </main>
+
     <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loading-overlay">
+    <div class="loading-overlay" id="loading-overlay" role="status" aria-live="polite">
         <div class="spinner"></div>
         <p class="loading-text">Processing Transaction...</p>
     </div>
     
     <!-- Notification System -->
-    <div class="notification-container" id="notification-container">
+    <div class="notification-container" id="notification-container" role="status" aria-live="polite">
         <!-- Notifications will be inserted here -->
     </div>
     
@@ -505,11 +660,12 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="images/steak.webp" alt="PulseChain Staking" width="40" height="40" loading="lazy">
+                    <img src="images/steak.webp" alt="" width="56" height="56" loading="lazy">
+                    <p>Single-sided staking pools for PulseChain projects.</p>
                 </div>
                 
                 <div class="footer-links">
-                    <h4>Quick Links</h4>
+                    <h4>Quick links</h4>
                     <ul>
                         <li><a href="#explore">Explore Pools</a></li>
                         <li><a href="#create">Create Pool</a></li>
@@ -520,68 +676,65 @@
                 <div class="footer-links">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="https://scan.mypinata.cloud/ipfs/bafybeih3olry3is4e4lzm7rus5l3h6zrphcal5a7ayfkhzm5oivjro2cp4/#/address/0x474225793869203F436aCEF9CF251Dc137cE02cB?tab=contract">Verified Contract</a></li>
-                        <li><a href="whitepaper.html">White Paper</a></li>
-                        <li><a href="guide.html">Guide</a></li>
-                        <li><a href="poolca.html">Verify Your Pool</a></li>
+                        <li><a href="https://scan.mypinata.cloud/ipfs/bafybeih3olry3is4e4lzm7rus5l3h6zrphcal5a7ayfkhzm5oivjro2cp4/#/address/0x474225793869203F436aCEF9CF251Dc137cE02cB?tab=contract" target="_blank" rel="noopener">Verified factory contract</a></li>
+                        <li><a href="whitepaper.html">Whitepaper</a></li>
+                        <li><a href="guide.html">User guide</a></li>
+                        <li><a href="poolca.html">Verify your pool contract</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-social">
-                    <h4>Connect With Us</h4>
+                    <h4>Community</h4>
                     <div class="social-icons">
-                        <a href="https://t.me/singlesteak" target="_blank" class="social-icon" rel="noopener">
-                            <i class="fab fa-telegram"></i>
+                        <a href="https://t.me/singlesteak" target="_blank" class="social-icon" rel="noopener" aria-label="Single Steak on Telegram">
+                            <i class="fab fa-telegram" aria-hidden="true"></i>
                         </a>
-                        <a href="https://x.com/singlesteak" target="_blank" class="social-icon" rel="noopener">
-                            <i class="fab fa-x-twitter"></i>
+                        <a href="https://x.com/singlesteak" target="_blank" class="social-icon" rel="noopener" aria-label="Single Steak on X">
+                            <i class="fab fa-x-twitter" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 SingleSteak. All rights reserved. Made by @GainRangerHeffe</p>
+                <p>&copy; 2025 Single Steak. All rights reserved. Made by <a href="https://github.com/GainRangerHeffe" target="_blank" rel="noopener">@GainRangerHeffe</a></p>
             </div>
         </div>
     </footer>
     
-    <div class="modal" id="wallet-modal">
+    <div class="modal" id="wallet-modal" role="dialog" aria-modal="true" aria-label="Connect wallet">
         <div class="modal-content wallet-modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Connect Wallet</h3>
-                <button class="close-modal" data-close-wallet-modal aria-label="Close wallet modal">&times;</button>
+                <button class="close-modal" type="button" data-close-wallet-modal aria-label="Close wallet list">&times;</button>
             </div>
         
             <div class="modal-body">
                 <p class="modal-description">Select a wallet to connect:</p>
             
                 <div class="wallet-options">
-                    <div class="wallet-option" data-wallet="metamask">
-                        <img src="images/metamask.png" alt="MetaMask" class="wallet-logo" width="32" height="32" loading="lazy" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg'">
+                    <button type="button" class="wallet-option" data-wallet="metamask">
+                        <img src="images/metamask.png" alt="" class="wallet-logo" width="32" height="32" loading="lazy" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg'">
                         <span>MetaMask</span>
-                    </div>
+                    </button>
                 
-                    <div class="wallet-option" data-wallet="okx">
-                        <img src="images/okx.png" alt="OKX Wallet" class="wallet-logo" width="32" height="32" loading="lazy" onerror="this.src='https://www.okx.com/cdn/assets/imgs/221/56386A2D5E13B91D.webp'">
+                    <button type="button" class="wallet-option" data-wallet="okx">
+                        <img src="images/okx.png" alt="" class="wallet-logo" width="32" height="32" loading="lazy" onerror="this.src='https://www.okx.com/cdn/assets/imgs/221/56386A2D5E13B91D.webp'">
                         <span>OKX Wallet</span>
-                    </div>
+                    </button>
                 
-                    <div class="wallet-option" data-wallet="rabby">
-                        <img src="images/rabby.png" alt="Rabby Wallet" class="wallet-logo" width="32" height="32" loading="lazy" onerror="this.src='https://rabby.io/assets/logo/rabby.svg'">
+                    <button type="button" class="wallet-option" data-wallet="rabby">
+                        <img src="images/rabby.png" alt="" class="wallet-logo" width="32" height="32" loading="lazy" onerror="this.src='https://rabby.io/assets/logo/rabby.svg'">
                         <span>Rabby Wallet</span>
-                    </div>
-                    <div class="wallet-option" data-wallet="internetmoney">
-                        <img src="images/im.png" alt="Internet Money" class="wallet-logo" width="32" height="32" loading="lazy" onerror="this.src='https://internetmoney.io/assets/logo/internetmoney.svg'">
+                    </button>
+                    <button type="button" class="wallet-option" data-wallet="internetmoney">
+                        <img src="images/im.png" alt="" class="wallet-logo" width="32" height="32" loading="lazy" onerror="this.src='https://internetmoney.io/assets/logo/internetmoney.svg'">
                         <span>Internet Money</span>
-                    </div>
+                    </button>
                 </div>
             
                 <div class="wallet-info">
-                    <p style="text-align: center; margin-top: 20px; padding: 10px; background-color: rgba(255,255,255,0.05); border-radius: 8px;">
-                        <strong>This dApp only works with PulseChain</strong><br>
-                        Chain ID: 369 (0x171)
-                    </p>
+                    <p><strong>Single Steak works on PulseChain only.</strong><br>Chain ID 369 (0x171)</p>
                 </div>
             </div>
         </div>
