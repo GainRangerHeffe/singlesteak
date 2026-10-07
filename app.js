@@ -12,9 +12,9 @@ const STEAK_POOL_ADDRESS = '0xYOUR_STEAK_POOL_ADDRESS'; // Replace with your dep
 const TAX_RECIPIENT_ADDRESS = '0xYOUR_WALLET_ADDRESS'; // Replace with your wallet address
 
 // Pinata configuration
-const PINATA_API_KEY = 'db6722dcdbcf63a7be47';
-const PINATA_SECRET_KEY = 'd11edf4dc173daec466e07f3b607bff6e20ba46ddf4ef1e8b5597efa2ba816d5';
-const PINATA_GATEWAY = 'https://black-electoral-dormouse-46.mypinata.cloud/ipfs/';
+const PINATA_API_KEY = 'YOUR_PINATA_API_KEY'; // Replace with your Pinata API key
+const PINATA_SECRET_KEY = 'YOUR_PINATA_SECRET_KEY'; // Replace with your Pinata secret key
+const PINATA_GATEWAY = 'https://gateway.pinata.cloud/ipfs/';
 
 // Constants for calculations
 const SECONDS_PER_YEAR = 31536000; // 365 days
