@@ -101,10 +101,18 @@
                     },
                     {
                         "@type": "Question",
+                        "name": "Why does a pool's APY change?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Each pool pays a set number of tokens per second, shared between everyone staking in proportion to their stake. When more tokens are staked the same rewards are spread thinner, so the APY falls. When tokens leave, it rises. A pool with very little staked can show a very high APY that will not last."
+                        }
+                    },
+                    {
+                        "@type": "Question",
                         "name": "What happens if a pool runs out of rewards?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Staking continues, but no new rewards are earned until the pool owner adds more reward tokens."
+                            "text": "The pool keeps counting rewards at its set rate, but it can only pay out tokens it actually holds. Pool owners need to keep their pool funded. Check a pool's status badge before you stake, and be cautious with pools that show no rewards."
                         }
                     },
                     {
@@ -396,35 +404,34 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="expected-tvl">Expected TVL (for APY calculation)</label>
+                        <label for="expected-tvl">Expected TVL (tokens you expect to be staked)</label>
                         <input type="number" id="expected-tvl" min="1" placeholder="e.g. 100000" required>
                         <div class="helper-text">
-                            <strong>Important:</strong> This is only used to estimate rewards duration and total emission rate at that TVL level. Actual APY is fixed and doesn't vary with TVL.
+                            The reward rate is worked out so the pool pays your target APY when this many tokens are staked. With fewer tokens staked the APY is higher; with more it is lower.
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="target-apy">Target APY (%)</label>
+                        <label for="target-apy">Target APY at expected TVL (%)</label>
                         <input type="number" id="target-apy" min="1" max="10000" placeholder="e.g. 20" required>
                         <div class="helper-text">
-                            <strong>This sets a fixed APY that remains constant regardless of how many tokens are staked.</strong> Total rewards emitted scale with TVL.
+                            <strong>APY is not fixed.</strong> The pool pays a set number of tokens per second, shared between all stakers by stake size, so the APY falls as more tokens are staked and rises as tokens leave.
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="reward-rate">Calculated Reward Rate (tokens per second)</label>
+                        <label for="reward-rate">Calculated reward rate (tokens per second, whole pool)</label>
                         <input type="number" id="reward-rate" step="0.000000000000000001" min="0" readonly>
                         <div class="helper-text">
-                            This is the reward rate per staked token per second. Total pool rewards per second = this multiplier × total staked tokens. <strong>New rate takes 24hrs once set for staker security.</strong>
+                            Total tokens the pool pays out each second, split between stakers. Calculated as expected TVL &times; target APY &divide; seconds in a year. <strong>Later rate changes take effect after a 24-hour timelock.</strong>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="initial-rewards">Initial Rewards Amount</label>
+                        <label for="initial-rewards">Initial rewards amount</label>
                         <input type="number" id="initial-rewards" min="0" required>
                         <div class="helper-text">
-                            Start with enough tokens to last until you expect more stakers to join. If you run out of rewards, 
-                            staking continues but no new rewards are distributed. You can add more rewards anytime as the pool owner.
+                            Reward tokens you deposit now. The pool keeps counting rewards at its rate whether or not it holds enough tokens to pay them, so top it up before it runs low. You can add more at any time as the pool owner.
                         </div>
                     </div>
                     
@@ -438,11 +445,11 @@
                     <div class="form-preview">
                         <h4>Preview</h4>
                         <div class="apy-preview">
-                            <span>Initial APY (at expected TVL):</span>
+                            <span>APY at expected TVL:</span>
                             <span id="estimated-apy">0%</span>
                         </div>
                         <div class="rewards-duration">
-                            <span>Rewards will last:</span>
+                            <span>Initial rewards will last:</span>
                             <span id="rewards-duration">0 days</span>
                         </div>
                         <div class="fee-display">
@@ -620,8 +627,12 @@
                     <p>No. You claim rewards yourself, and you can stake them again if you want to.</p>
                 </details>
                 <details>
+                    <summary>Why does a pool&#39;s APY change?</summary>
+                    <p>Each pool pays a set number of tokens per second, shared between everyone staking in proportion to their stake. When more tokens are staked the same rewards are spread thinner, so the APY falls. When tokens leave, it rises. A pool with very little staked can show a very high APY that will not last.</p>
+                </details>
+                <details>
                     <summary>What happens if a pool runs out of rewards?</summary>
-                    <p>Staking continues, but no new rewards are earned until the pool owner adds more reward tokens.</p>
+                    <p>The pool keeps counting rewards at its set rate, but it can only pay out tokens it actually holds. Pool owners need to keep their pool funded. Check a pool&#39;s status badge before you stake, and be cautious with pools that show no rewards.</p>
                 </details>
                 <details>
                     <summary>Which tokens can have a pool?</summary>

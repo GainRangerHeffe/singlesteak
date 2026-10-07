@@ -1,202 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Verify Your Staking Pool Contract on PulseScan | Single Steak</title>
-    <meta name="description" content="Step-by-step guide to verifying a Single Steak staking pool contract on PulseScan, with the compiler settings and the full contract source to paste.">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://singlesteak.com/poolca.html">
-    <meta name="theme-color" content="#080914">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Single Steak">
-    <meta property="og:title" content="Verify Your Staking Pool Contract on PulseScan | Single Steak">
-    <meta property="og:description" content="Step-by-step guide to verifying a Single Steak staking pool contract on PulseScan, with the compiler settings and the full contract source to paste.">
-    <meta property="og:url" content="https://singlesteak.com/poolca.html">
-    <meta property="og:image" content="https://singlesteak.com/images/meta.webp">
-
-    <!-- Twitter / X -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@singlesteak">
-    <meta name="twitter:title" content="Verify Your Staking Pool Contract on PulseScan | Single Steak">
-    <meta name="twitter:description" content="Step-by-step guide to verifying a Single Steak staking pool contract on PulseScan, with the compiler settings and the full contract source to paste.">
-    <meta name="twitter:image" content="https://singlesteak.com/images/meta.webp">
-
-    <link rel="icon" href="images/steak.ico">
-
-    <!-- Fonts and icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- Structured data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "TechArticle",
-                "@id": "https://singlesteak.com/poolca.html#article",
-                "headline": "Verify your Single Steak pool contract on PulseScan",
-                "description": "Step-by-step guide to verifying a Single Steak staking pool contract on PulseScan, with the compiler settings and the full contract source to paste.",
-                "url": "https://singlesteak.com/poolca.html",
-                "inLanguage": "en",
-                "image": "https://singlesteak.com/images/meta.webp",
-                "author": {
-                    "@type": "Organization",
-                    "name": "Single Steak",
-                    "url": "https://singlesteak.com/"
-                },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": "Single Steak",
-                    "url": "https://singlesteak.com/"
-                }
-            },
-            {
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Single Steak",
-                        "item": "https://singlesteak.com/"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "Contract verification",
-                        "item": "https://singlesteak.com/poolca.html"
-                    }
-                ]
-            }
-        ]
-    }
-    </script>
-</head>
-<body>
-    <a class="skip-link" href="#main">Skip to content</a>
-
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <a href="index.html" class="logo" aria-label="Single Steak, home">
-                    <img src="images/steak.webp" alt="" id="site-logo" width="44" height="44">
-                    <span class="logo-text">Single Steak</span>
-                </a>
-                <nav class="main-nav" aria-label="Main">
-                    <ul class="nav-links">
-                        <li><a href="index.html#explore" class="nav-link">Explore Pools</a></li>
-                        <li><a href="index.html#create" class="nav-link create-btn">Create Pool</a></li>
-                        <li><a href="guide.html" class="nav-link">User Guide</a></li>
-                        <li><a href="whitepaper.html" class="nav-link">Whitepaper</a></li>
-                        <li><a href="poolca.html" class="nav-link">Verify a Pool</a></li>
-                    </ul>
-                </nav>
-                <div class="wallet-connect">
-                    <a href="index.html" class="btn connect-btn">Open the app</a>
-                </div>
-                <button class="mobile-menu-toggle" type="button" aria-label="Menu" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <main id="main">
-    <div class="verification-guide">
-        <a href="index.html" class="back-link">
-            <i class="fas fa-arrow-left" aria-hidden="true"></i>
-            Back to Single Steak
-        </a>
-        
-        <div class="guide-header">
-            <h1>Contract verification guide</h1>
-            <p>Learn how to verify your staking pool contract on PulseScan</p>
-        </div>
-
-        <div class="guide-section">
-            <h2>Why Verify Your Contract?</h2>
-            <p>Contract verification provides transparency and trust by:</p>
-            <ul>
-                <li><strong>Source Code Visibility:</strong> Users can read the contract's source code</li>
-                <li><strong>Security Assurance:</strong> Proves the contract does exactly what it claims</li>
-                <li><strong>Trust Building:</strong> Shows professionalism and transparency</li>
-                <li><strong>Block Explorer Integration:</strong> Better interaction with PulseScan</li>
-            </ul>
-        </div>
-
-        <div class="guide-section">
-            <div class="step-title">
-                <span class="step-number">1</span>
-                <h3>Get Your Pool Contract Address</h3>
-            </div>
-            
-            <p>First, you'll need your pool's contract address. You can find this in:</p>
-            <ul>
-                <li>Your developer dashboard (click the address to copy)</li>
-                <li>The success notification when you created the pool</li>
-                <li>The pool details modal if you're the owner</li>
-            </ul>
-            
-            <div class="info-box">
-                <i class="fas fa-info-circle" aria-hidden="true"></i>
-                <strong>Note:</strong> Each staking pool has its own unique contract address, separate from the factory contract.
-            </div>
-        </div>
-
-        <div class="guide-section">
-            <div class="step-title">
-                <span class="step-number">2</span>
-                <h3>Go to PulseScan</h3>
-            </div>
-            
-            <p>Navigate to <a href="https://scan.pulsechain.com" target="_blank" rel="noopener">scan.pulsechain.com</a> and:</p>
-            <ol>
-                <li>Search for your pool contract address</li>
-                <li>Click on the contract address in the results</li>
-                <li>Go to the "Contract" tab</li>
-                <li>Click "Verify and Publish"</li>
-            </ol>
-        </div>
-
-        <div class="guide-section">
-            <div class="step-title">
-                <span class="step-number">3</span>
-                <h3>Select Verification Method</h3>
-            </div>
-            
-            <p>Choose the following options:</p>
-            <ul>
-                <li><strong>Compiler Type:</strong> Solidity (Single file)</li>
-                <li><strong>Compiler Version:</strong> v0.8.20+commit.a1b79de6</li>
-                <li><strong>Optimization:</strong> Enabled, 200 runs</li>
-                <li><strong>EVM Version:</strong> default</li>
-                <li><strong>Open Source License:</strong> MIT License (MIT)</li>
-            </ul>
-        </div>
-
-        <div class="guide-section">
-            <div class="step-title">
-                <span class="step-number">4</span>
-                <h3>Paste the Contract Source Code</h3>
-            </div>
-            
-            <p>Copy and paste the following contract code into the source code field:</p>
-            
-            <div class="code-block">
-                <button class="copy-btn" onclick="copyContractCode()">
-                    <i class="fas fa-copy" aria-hidden="true"></i> Copy
-                </button>
-                <pre id="contract-code">// File: @openzeppelin/contracts/utils/Context.sol
+// File: @openzeppelin/contracts/utils/Context.sol
 
 
 // OpenZeppelin Contracts (last updated v5.0.1) (utils/Context.sol)
@@ -708,7 +510,7 @@ library SafeERC20 {
     function safeDecreaseAllowance(IERC20 token, address spender, uint256 requestedDecrease) internal {
         unchecked {
             uint256 currentAllowance = token.allowance(address(this), spender);
-            if (currentAllowance &lt; requestedDecrease) {
+            if (currentAllowance < requestedDecrease) {
                 revert SafeERC20FailedDecreaseAllowance(spender, currentAllowance, requestedDecrease);
             }
             forceApprove(token, spender, currentAllowance - requestedDecrease);
@@ -833,7 +635,7 @@ library SafeERC20 {
             returnSize := returndatasize()
             returnValue := mload(0)
         }
-        return success &amp;&amp; (returnSize == 0 ? address(token).code.length &gt; 0 : returnValue == 1);
+        return success && (returnSize == 0 ? address(token).code.length > 0 : returnValue == 1);
     }
 }
 
@@ -874,13 +676,13 @@ contract StakingPool is Ownable, ReentrancyGuard {
     bool public rewardRateUpdatePending;
     
     // User data mapping
-    mapping(address =&gt; uint256) public userStakedAmount;
-    mapping(address =&gt; uint256) public rewards;
-    mapping(address =&gt; uint256) public userRewardPerTokenPaid;
+    mapping(address => uint256) public userStakedAmount;
+    mapping(address => uint256) public rewards;
+    mapping(address => uint256) public userRewardPerTokenPaid;
     
     // Unique staker tracking - NEW
     uint256 public uniqueStakerCount;
-    mapping(address =&gt; bool) public hasStaked;
+    mapping(address => bool) public hasStaked;
 
     // Events
     event Staked(address indexed user, uint256 amount);
@@ -953,7 +755,7 @@ contract StakingPool is Ownable, ReentrancyGuard {
      */
     function applyRewardRateUpdate() external {
         require(rewardRateUpdatePending, "No pending reward rate update");
-        require(block.timestamp &gt;= rewardRateUpdateTime, "Timelock not expired");
+        require(block.timestamp >= rewardRateUpdateTime, "Timelock not expired");
         
         _updateReward(address(0));
         
@@ -1016,7 +818,7 @@ contract StakingPool is Ownable, ReentrancyGuard {
      * @param amount Amount of tokens to add as rewards
      */
     function addRewards(uint256 amount) external onlyOwner {
-        require(amount &gt; 0, "Cannot add zero rewards");
+        require(amount > 0, "Cannot add zero rewards");
         
         stakingToken.safeTransferFrom(msg.sender, address(this), amount);
     }
@@ -1026,7 +828,7 @@ contract StakingPool is Ownable, ReentrancyGuard {
      * @param amount Amount to stake
      */
     function stake(uint256 amount) external nonReentrant updateReward(msg.sender) {
-        require(amount &gt; 0, "Cannot stake 0");
+        require(amount > 0, "Cannot stake 0");
         
         // Track unique stakers - NEW
         if (!hasStaked[msg.sender]) {
@@ -1047,8 +849,8 @@ contract StakingPool is Ownable, ReentrancyGuard {
      * @param amount Amount to withdraw
      */
     function withdraw(uint256 amount) external nonReentrant updateReward(msg.sender) {
-        require(amount &gt; 0, "Cannot withdraw 0");
-        require(userStakedAmount[msg.sender] &gt;= amount, "Not enough staked");
+        require(amount > 0, "Cannot withdraw 0");
+        require(userStakedAmount[msg.sender] >= amount, "Not enough staked");
         
         totalStaked -= amount;
         userStakedAmount[msg.sender] -= amount;
@@ -1064,7 +866,7 @@ contract StakingPool is Ownable, ReentrancyGuard {
     function claimRewards() external nonReentrant updateReward(msg.sender) {
         uint256 reward = rewards[msg.sender];
         
-        if (reward &gt; 0) {
+        if (reward > 0) {
             rewards[msg.sender] = 0;
             stakingToken.safeTransfer(msg.sender, reward);
             
@@ -1077,7 +879,7 @@ contract StakingPool is Ownable, ReentrancyGuard {
      */
     function exit() external nonReentrant updateReward(msg.sender) {
         uint256 amount = userStakedAmount[msg.sender];
-        if (amount &gt; 0) {
+        if (amount > 0) {
             totalStaked -= amount;
             userStakedAmount[msg.sender] = 0;
             stakingToken.safeTransfer(msg.sender, amount);
@@ -1085,7 +887,7 @@ contract StakingPool is Ownable, ReentrancyGuard {
         }
         
         uint256 reward = rewards[msg.sender];
-        if (reward &gt; 0) {
+        if (reward > 0) {
             rewards[msg.sender] = 0;
             stakingToken.safeTransfer(msg.sender, reward);
             emit RewardsClaimed(msg.sender, reward);
@@ -1178,7 +980,7 @@ contract StakingPoolFactory is Ownable {
         uint256 initialRewardRate
     ) external payable returns (address) {
         // Check if fee is paid
-        require(msg.value &gt;= poolCreationFee, "Insufficient fee");
+        require(msg.value >= poolCreationFee, "Insufficient fee");
         
         // Create new staking pool with caller as owner
         StakingPool newPool = new StakingPool(
@@ -1194,14 +996,14 @@ contract StakingPoolFactory is Ownable {
         stakingPools.push(address(newPool));
         
         // Transfer fee to recipient
-        if (poolCreationFee &gt; 0) {
+        if (poolCreationFee > 0) {
             (bool success, ) = feeRecipient.call{value: poolCreationFee}("");
             require(success, "Fee transfer failed");
         }
         
         // Refund excess payment if any
         uint256 excess = msg.value - poolCreationFee;
-        if (excess &gt; 0) {
+        if (excess > 0) {
             (bool success, ) = msg.sender.call{value: excess}("");
             require(success, "Refund failed");
         }
@@ -1228,7 +1030,7 @@ contract StakingPoolFactory is Ownable {
         uint256 count = 0;
         
         // Count pools owned by developer
-        for (uint256 i = 0; i &lt; stakingPools.length; i++) {
+        for (uint256 i = 0; i < stakingPools.length; i++) {
             if (StakingPool(stakingPools[i]).owner() == developer) {
                 count++;
             }
@@ -1239,7 +1041,7 @@ contract StakingPoolFactory is Ownable {
         uint256 index = 0;
         
         // Fill result array
-        for (uint256 i = 0; i &lt; stakingPools.length; i++) {
+        for (uint256 i = 0; i < stakingPools.length; i++) {
             if (StakingPool(stakingPools[i]).owner() == developer) {
                 result[index] = stakingPools[i];
                 index++;
@@ -1249,161 +1051,3 @@ contract StakingPoolFactory is Ownable {
         return result;
     }
 }
-</pre>
-            </div>
-        </div>
-
-        <div class="guide-section">
-            <div class="step-title">
-                <span class="step-number">5</span>
-                <h3>Enter Constructor Parameters</h3>
-            </div>
-            
-            <p>You'll need to enter the exact parameters used when your pool was created. These are:</p>
-            
-            <div class="parameter-list">
-                <div class="parameter-item">
-                    <span class="parameter-name">_stakingToken</span>
-                    <span class="parameter-desc">Your token's contract address</span>
-                </div>
-                <div class="parameter-item">
-                    <span class="parameter-name">_tokenName</span>
-                    <span class="parameter-desc">Token name you entered (e.g., "My Token")</span>
-                </div>
-                <div class="parameter-item">
-                    <span class="parameter-name">_tokenSymbol</span>
-                    <span class="parameter-desc">Token symbol you entered (e.g., "MTK")</span>
-                </div>
-                <div class="parameter-item">
-                    <span class="parameter-name">_poolImageUrl</span>
-                    <span class="parameter-desc">IPFS URL or data URL of your pool image</span>
-                </div>
-                <div class="parameter-item">
-                    <span class="parameter-name">_initialRewardRate</span>
-                    <span class="parameter-desc">Calculated reward rate (very small number)</span>
-                </div>
-                <div class="parameter-item">
-                    <span class="parameter-name">_owner</span>
-                    <span class="parameter-desc">Your wallet address</span>
-                </div>
-            </div>
-            
-            <div class="warning-box">
-                <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
-                <strong>Important:</strong> All parameters must be exactly as they were when the pool was created. If you're unsure about any values, you can view them by reading the contract on PulseScan before verification.
-            </div>
-        </div>
-
-        <div class="guide-section">
-            <div class="step-title">
-                <span class="step-number">6</span>
-                <h3>Complete Verification</h3>
-            </div>
-            
-            <p>After entering all information:</p>
-            <ol>
-                <li>Double-check all parameters are correct</li>
-                <li>Click "Verify and Publish"</li>
-                <li>Wait for the verification process to complete</li>
-                <li>You should see a green checkmark indicating success!</li>
-            </ol>
-            
-            <div class="info-box">
-                <i class="fas fa-check-circle" aria-hidden="true"></i>
-                <strong>Success!</strong> Once verified, users will be able to read your contract's source code directly on PulseScan, increasing trust and transparency.
-            </div>
-        </div>
-
-        <div class="guide-section">
-            <h2>Troubleshooting</h2>
-            
-            <h4>Common Issues:</h4>
-            <ul>
-                <li><strong>Constructor parameter mismatch:</strong> Make sure all parameters exactly match what was used during deployment</li>
-                <li><strong>Wrong compiler version:</strong> Use exactly v0.8.20+commit.a1b79de6</li>
-                <li><strong>Library imports:</strong> The OpenZeppelin imports should resolve automatically</li>
-                <li><strong>Optimization settings:</strong> Must be enabled with 200 runs, the same as the factory</li>
-            </ul>
-            
-            <p>If you continue having issues, you can contact support or ask for help in the community.</p>
-        </div>
-    </div>
-    </main>
-
-    <footer class="footer" id="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="images/steak.webp" alt="" width="56" height="56" loading="lazy">
-                    <p>Single-sided staking pools for PulseChain projects.</p>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Quick links</h4>
-                    <ul>
-                        <li><a href="index.html#explore">Explore Pools</a></li>
-                        <li><a href="index.html#create">Create Pool</a></li>
-                        <li><a href="index.html#dashboard">My Dashboard</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Documentation</h4>
-                    <ul>
-                        <li><a href="https://scan.mypinata.cloud/ipfs/bafybeih3olry3is4e4lzm7rus5l3h6zrphcal5a7ayfkhzm5oivjro2cp4/#/address/0x474225793869203F436aCEF9CF251Dc137cE02cB?tab=contract" target="_blank" rel="noopener">Verified factory contract</a></li>
-                        <li><a href="whitepaper.html">Whitepaper</a></li>
-                        <li><a href="guide.html">User guide</a></li>
-                        <li><a href="poolca.html">Verify your pool contract</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-social">
-                    <h4>Community</h4>
-                    <div class="social-icons">
-                        <a href="https://t.me/singlesteak" target="_blank" class="social-icon" rel="noopener" aria-label="Single Steak on Telegram">
-                            <i class="fab fa-telegram" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://x.com/singlesteak" target="_blank" class="social-icon" rel="noopener" aria-label="Single Steak on X">
-                            <i class="fab fa-x-twitter" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2025 Single Steak. All rights reserved. Made by <a href="https://github.com/GainRangerHeffe" target="_blank" rel="noopener">@GainRangerHeffe</a></p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="nav.js" defer></script>
-    <script>
-        function copyContractCode() {
-            const codeElement = document.getElementById('contract-code');
-            const textToCopy = codeElement.textContent;
-            
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                const button = document.querySelector('.copy-btn');
-                const originalText = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                button.style.background = 'var(--success-color)';
-                
-                setTimeout(() => {
-                    button.innerHTML = originalText;
-                    button.style.background = '';
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = textToCopy;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                alert('Contract code copied to clipboard!');
-            });
-        }
-    </script>
-</body>
-</html>

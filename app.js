@@ -979,13 +979,17 @@ function setupPoolCreationCalculations() {
         const initialRewards = parseFloat(initialRewardsInput?.value) || 0;
 
         if (targetApy > 0) {
-            // Calculate multiplier: targetAPY / (100 * secondsPerYear)
-            const calculatedMultiplier = targetApy / (100 * SECONDS_PER_YEAR);
+            // The contract's rewardRate is the total tokens per second paid to the
+            // whole pool, shared pro rata. To hit the target APY at the expected TVL:
+            // rate = expectedTVL * (targetAPY / 100) / secondsPerYear
+            const poolRewardRate = expectedTvl > 0
+                ? (expectedTvl * targetApy) / (100 * SECONDS_PER_YEAR)
+                : 0;
             if (rewardRateInput) {
-                rewardRateInput.value = calculatedMultiplier.toFixed(18);
+                rewardRateInput.value = poolRewardRate > 0 ? poolRewardRate.toFixed(18) : '';
 
-                // Store the calculated multiplier for form submission
-                rewardRateInput.setAttribute('data-rate', calculatedMultiplier.toString());
+                // Store the calculated rate for form submission
+                rewardRateInput.setAttribute('data-rate', poolRewardRate.toString());
             }
 
             // Update APY preview
@@ -994,10 +998,9 @@ function setupPoolCreationCalculations() {
                 estimatedApyEl.textContent = `${targetApy}%`;
             }
 
-            // Calculate rewards duration using expected TVL if entered
-            if (initialRewards > 0 && calculatedMultiplier > 0 && expectedTvl > 0) {
-                const rewardsPerSecond = calculatedMultiplier * expectedTvl;
-                const durationSeconds = initialRewards / rewardsPerSecond;
+            // Rewards duration: the pool pays out at the same rate whatever the TVL
+            if (initialRewards > 0 && poolRewardRate > 0) {
+                const durationSeconds = initialRewards / poolRewardRate;
                 const durationDays = durationSeconds / 86400;
                 const rewardsDurationEl = getElement('rewards-duration');
                 if (rewardsDurationEl) {
@@ -1595,7 +1598,10 @@ async function getPoolData(poolAddress) {
                 const providerToUse = signer || readOnlyProvider;
                 if (providerToUse) {
                     const tokenContract = new ethers.Contract(stakingTokenAddr, ERC20_ABI, providerToUse);
-                    const poolRewardBalanceRaw = await tokenContract.balanceOf(poolAddress);
+                    // Stakes and rewards are the same token held in one balance,
+                    // so the rewards available are whatever is not staked principal.
+                    const poolBalanceRaw = await tokenContract.balanceOf(poolAddress);
+                    const poolRewardBalanceRaw = poolBalanceRaw > totalStaked ? poolBalanceRaw - totalStaked : 0n;
                     rewardBalance = ethers.formatUnits(poolRewardBalanceRaw, decimals);
                     console.log(`Pool ${poolAddress} reward balance: ${rewardBalance} ${tokenSymbol}`);
                 }
@@ -1682,8 +1688,12 @@ async function getDeveloperPoolData(poolAddress) {
         const poolContract = new ethers.Contract(poolAddress, STAKING_POOL_ABI, signer);
         const tokenContract = new ethers.Contract(basicData.stakingToken, ERC20_ABI, signer);
         
-        // Get pool's token balance (reward tokens available)
-        const poolRewardBalance = await tokenContract.balanceOf(poolAddress);
+        // Reward tokens available: the pool's token balance minus staked principal
+        const [poolTokenBalance, poolTotalStaked] = await Promise.all([
+            tokenContract.balanceOf(poolAddress),
+            poolContract.totalStaked()
+        ]);
+        const poolRewardBalance = poolTokenBalance > poolTotalStaked ? poolTokenBalance - poolTotalStaked : 0n;
         const rewardBalanceFormatted = ethers.formatUnits(poolRewardBalance, basicData.tokenDecimals);
         
         // Calculate reward duration

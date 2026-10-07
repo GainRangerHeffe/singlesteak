@@ -13,12 +13,19 @@ A static front end. There is no build step.
 | `guide.html` | User guide |
 | `whitepaper.html` | Protocol whitepaper (v1.0.0) |
 | `app.js` | Wallet connection, contract calls and pool logic |
+| `contracts/SingleSteak.sol` | Verified source of the factory and pool contracts (Solidity 0.8.20, optimizer on, 200 runs) |
 | `styles.css` | Shared design tokens and styles for all four pages |
 | `nav.js` | Mobile menu for the three documentation pages |
 | `robots.txt`, `sitemap.xml`, `llms.txt` | Crawler and AI-assistant discovery files |
 | `images/`, `assets/` | Logos, wallet icons and illustrations |
 
 The front end talks to a pool factory contract on PulseChain (chain ID 369, `0x171`). The factory address is set at the top of `app.js`.
+
+## How rewards work
+
+Each pool has one `rewardRate`: the total tokens per second paid to the whole pool, split between stakers in proportion to their stake. APY is therefore not fixed. It is `rewardRate * seconds per year / totalStaked`, so it falls as more tokens are staked.
+
+Staked tokens and reward tokens are the same token held in one contract balance, and the contract keeps accruing rewards whether or not the owner has funded them. A pool whose rewards have run out can therefore pay claims out of staked tokens. Owners must keep pools funded, and the front end shows "rewards available" as the pool balance minus staked principal.
 
 ## Run locally
 

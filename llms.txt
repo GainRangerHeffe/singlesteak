@@ -8,6 +8,7 @@
 - Factory contract: 0x474225793869203F436aCEF9CF251Dc137cE02cB
 - No lock-up: stakers can unstake at any time
 - Rewards are claimed manually and are not auto-compounded
+- Each pool pays a set number of tokens per second, shared pro rata; APY falls as more tokens are staked
 - Reward rate changes by a pool owner are subject to a 24-hour timelock
 - Creating a pool costs a one-time fee paid in PLS
 - Supported wallets: MetaMask, OKX Wallet, Rabby, Internet Money

@@ -414,7 +414,7 @@
                     
                     <div class="swot-item">
                         <h4>What happens if the reward pool runs out?</h4>
-                        <p>When rewards are depleted, users will stop earning new rewards until the pool owner adds more.</p>
+                        <p>The pool keeps counting rewards at its set rate, but it can only pay out tokens it actually holds. Pool owners need to keep their pool funded. Check a pool's status before you stake, and be cautious with pools that show no rewards.</p>
                     </div>
                 </div>
                 
@@ -432,7 +432,7 @@
                     
                     <div class="swot-item">
                         <h4>How is the estimated APY calculated during pool creation?</h4>
-                        <p>The initial APY estimate is calculated based on the reward rate and initial rewards: <span class="code-flow">(Yearly Rewards / Initial Rewards) * 100</span>.</p>
+                        <p>You enter the TVL you expect and the APY you want at that TVL. The reward rate is then <span class="code-flow">Expected TVL * (Target APY / 100) / Seconds per year</span>, and the live APY at any moment is <span class="code-flow">(Reward Rate * Seconds per year / Total Staked) * 100</span>.</p>
                     </div>
                 </div>
                 
